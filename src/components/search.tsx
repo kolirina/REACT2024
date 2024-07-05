@@ -21,11 +21,7 @@ class Search extends Component<SearchProps, SearchState> {
 
   handleSubmit = () => {
     const searchTerm = this.state.searchTerm.trim();
-
-    // Сохраняем поисковый запрос в локальное хранилище
     localStorage.setItem('searchTerm', searchTerm);
-
-    // Вызываем коллбэк onSearch для выполнения запроса к API
     this.props.onSearch(searchTerm);
   };
 
