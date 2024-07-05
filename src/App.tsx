@@ -15,7 +15,6 @@ interface SearchResult {
 class App extends Component<Record<string, never>, AppState> {
   constructor(props: Record<string, never>) {
     super(props);
-
     this.state = {
       results: [],
     };

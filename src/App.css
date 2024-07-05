@@ -13,3 +13,7 @@
   display: flex;
   gap: 15px;
 }
+
+input::placeholder {
+  color: rgb(234, 244, 252);
+}
