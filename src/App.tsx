@@ -5,6 +5,7 @@ import SearchResults from './components/searchResults';
 
 interface AppState {
   results: AnimalInfo[];
+  isLoading: boolean;
 }
 
 interface AnimalInfo {
@@ -28,6 +29,7 @@ class App extends Component<Record<string, never>, AppState> {
     super(props);
     this.state = {
       results: [],
+      isLoading: false,
     };
   }
 
@@ -37,6 +39,8 @@ class App extends Component<Record<string, never>, AppState> {
   }
 
   handleSearch = async (searchTerm: string) => {
+    this.setState({ isLoading: true });
+
     const pageNumber = 0;
     const pageSize = 15;
 
@@ -72,9 +76,10 @@ class App extends Component<Record<string, never>, AppState> {
         };
       });
 
-      this.setState({ results });
+      this.setState({ results, isLoading: false });
     } catch (error) {
       console.error('Error fetching data:', error);
+      this.setState({ isLoading: false });
     }
   };
   render() {
@@ -84,7 +89,11 @@ class App extends Component<Record<string, never>, AppState> {
           <Search onSearch={this.handleSearch} />
         </div>
         <div className="bottom-section">
-          <SearchResults results={this.state.results} />
+          {this.state.isLoading ? (
+            <div className="loader"></div>
+          ) : (
+            <SearchResults results={this.state.results} />
+          )}
         </div>
       </div>
     );
