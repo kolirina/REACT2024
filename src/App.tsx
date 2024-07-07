@@ -6,6 +6,8 @@ import SearchResults from './components/searchResults';
 interface AppState {
   results: AnimalInfo[];
   isLoading: boolean;
+  hasError: boolean;
+  isErrBtnClicked: boolean;
 }
 
 interface AnimalInfo {
@@ -30,6 +32,8 @@ class App extends Component<Record<string, never>, AppState> {
     this.state = {
       results: [],
       isLoading: false,
+      hasError: false,
+      isErrBtnClicked: false,
     };
   }
 
@@ -82,7 +86,15 @@ class App extends Component<Record<string, never>, AppState> {
       this.setState({ isLoading: false });
     }
   };
+
+  handleErrorButtonClick = () => {
+    this.setState({ isErrBtnClicked: true });
+  };
+
   render() {
+    if (this.state.isErrBtnClicked) {
+      throw new Error('Test Error');
+    }
     return (
       <div className="App">
         <div className="top-section">
@@ -90,11 +102,18 @@ class App extends Component<Record<string, never>, AppState> {
         </div>
         <div className="bottom-section">
           {this.state.isLoading ? (
-            <div className="loader"></div>
-          ) : (
+            <div className="loader-container">
+              <div className="loader"></div>
+            </div>
+          ) : this.state.results.length > 0 ? (
             <SearchResults results={this.state.results} />
+          ) : (
+            <div className="nothing-found">No animal found. Try again😸</div>
           )}
         </div>
+        <button className="error-button" onClick={this.handleErrorButtonClick}>
+          Throw Error
+        </button>
       </div>
     );
   }

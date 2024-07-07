@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 interface SearchProps {
   onSearch: (searchTerm: string) => void;
 }
