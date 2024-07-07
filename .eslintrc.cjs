@@ -22,7 +22,7 @@ module.exports = {
     ],
     'react-compiler/react-compiler': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-    // "no-console": ["warn", { allow: ["warn", "error"] }],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
   },
   settings: {
     react: {

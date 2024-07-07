@@ -21,6 +21,7 @@ class Search extends Component<SearchProps, SearchState> {
 
   handleSubmit = () => {
     const searchTerm = this.state.searchTerm.trim();
+    this.setState({ searchTerm });
     localStorage.setItem('searchTerm', searchTerm);
     this.props.onSearch(searchTerm);
   };
@@ -31,12 +32,12 @@ class Search extends Component<SearchProps, SearchState> {
 
   render() {
     return (
-      <div className="search-section">
+      <div className="top-section">
         <input
           type="text"
           value={this.state.searchTerm}
           onChange={this.handleInputChange}
-          placeholder="Enter search term"
+          placeholder="Find an Animal 🔍"
         />
         <button onClick={this.handleSubmit}>Search</button>
       </div>

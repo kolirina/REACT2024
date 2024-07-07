@@ -27,9 +27,8 @@ input {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #8bb4cf;
+  background-color: #8bb4cf79;
   cursor: pointer;
-  transition: border-color 0.25s;
 }
 
 button {
@@ -39,14 +38,10 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #e689d2;
+  background-color: #e689d2d5;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
   background-color: #c9a6f7;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }

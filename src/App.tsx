@@ -4,12 +4,23 @@ import Search from './components/search';
 import SearchResults from './components/searchResults';
 
 interface AppState {
-  results: SearchResult[];
+  results: AnimalInfo[];
 }
 
-interface SearchResult {
+interface AnimalInfo {
+  uid: string;
   name: string;
-  description: string;
+  descriptions: string[];
+}
+
+interface Animal {
+  uid: string;
+  name: string;
+  earthAnimal: boolean;
+  earthInsect: boolean;
+  avian: boolean;
+  canine: boolean;
+  feline: boolean;
 }
 
 class App extends Component<Record<string, never>, AppState> {
@@ -20,29 +31,48 @@ class App extends Component<Record<string, never>, AppState> {
     };
   }
 
+  componentDidMount() {
+    const savedSearchTerm = localStorage.getItem('searchTerm') || '';
+    this.handleSearch(savedSearchTerm);
+  }
+
   handleSearch = async (searchTerm: string) => {
-    const apiEndpoint = 'https://stapi.co/api/v1/rest/animal/search';
-    const requestData = new URLSearchParams();
-    requestData.append('pageNumber', '0');
-    requestData.append('pageSize', '20');
-    requestData.append('title', searchTerm);
-    requestData.append('name', searchTerm);
+    const pageNumber = 0;
+    const pageSize = 15;
+
+    const apiEndpoint = `https://stapi.co/api/v1/rest/animal/search?pageNumber=${pageNumber}&pageSize=${pageSize}&title=${searchTerm}&name=${searchTerm}`;
 
     try {
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: requestData.toString(),
       });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
       const data = await response.json();
-      console.log('Search results:', data);
+      const results = data.animals.map((animal: Animal) => {
+        const descriptions: string[] = [];
+        if (animal.earthAnimal) descriptions.push('Earth Animal 🐾');
+        if (animal.earthInsect) descriptions.push('Earth Insect 🦗');
+        if (animal.avian) descriptions.push('Avian 🦜');
+        if (animal.canine) descriptions.push('Canine 🐶');
+        if (animal.feline) descriptions.push('Feline 😺');
+        if (descriptions.length === 0) {
+          descriptions.push('an infinitely cute animal 👻');
+        }
+
+        return {
+          uid: animal.uid,
+          name: animal.name,
+          descriptions,
+        };
+      });
+
+      this.setState({ results });
     } catch (error) {
       console.error('Error fetching data:', error);
     }

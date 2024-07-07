@@ -5,15 +5,26 @@
   text-align: center;
 }
 
+.App {
+  padding: 50px;
+  background-color: rgba(238, 250, 213, 0.199);
+  border-radius: 15px;
+}
+
 .card {
   padding: 2em;
 }
 
-.search-section {
+.top-section {
   display: flex;
   gap: 15px;
+  justify-content: center;
 }
 
 input::placeholder {
-  color: rgb(234, 244, 252);
+  color: rgba(234, 244, 252, 0.808);
+}
+
+ul {
+  list-style-type: none;
 }
