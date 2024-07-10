@@ -105,10 +105,16 @@ class App extends Component<Record<string, never>, AppState> {
             <div className="loader-container">
               <div className="loader"></div>
             </div>
-          ) : this.state.results.length > 0 ? (
-            <SearchResults results={this.state.results} />
           ) : (
-            <div className="nothing-found">No animal found. Try again😸</div>
+            <>
+              {this.state.results.length > 0 ? (
+                <SearchResults results={this.state.results} />
+              ) : (
+                <div className="nothing-found">
+                  No animal found. Try again😸
+                </div>
+              )}
+            </>
           )}
         </div>
         <button className="error-button" onClick={this.handleErrorButtonClick}>
