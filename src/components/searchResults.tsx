@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React from 'react';
 
 interface AnimalInfo {
   uid: string;
@@ -10,22 +10,19 @@ interface SearchResultsProps {
   results: AnimalInfo[];
 }
 
-class SearchResults extends Component<SearchResultsProps> {
-  render() {
-    return (
-      <div className="search-results">
-        <h2>Search Results</h2>
-        <ul>
-          {this.props.results.map((result, index) => (
-            <li key={index}>
-              <strong>{result.name}</strong>: {result.name} is{' '}
-              {result.descriptions.join(' and ')}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
+const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
+  return (
+    <div className="search-results">
+      <h2>Search Results</h2>
+      <ul>
+        {results.map((result, index) => (
+          <li key={index}>
+            <strong>{result.name}</strong>: {result.descriptions.join(' and ')}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default SearchResults;

@@ -1,20 +1,23 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Search from './components/search';
 import SearchResults from './components/searchResults';
+import { searchAnimals } from './services/api';
+import ErrorBoundary from './components/ErrorBoundary';
+// import useSearchTerm from './hooks/useSearchTerm';
 
-interface AppState {
-  results: AnimalInfo[];
-  isLoading: boolean;
-  hasError: boolean;
-  isErrBtnClicked: boolean;
-}
+// interface AppState {
+//   results: AnimalInfo[];
+//   isLoading: boolean;
+//   hasError: boolean;
+//   isErrBtnClicked: boolean;
+// }
 
-interface AnimalInfo {
-  uid: string;
-  name: string;
-  descriptions: string[];
-}
+// interface AnimalInfo {
+//   uid: string;
+//   name: string;
+//   descriptions: string[];
+// }
 
 interface Animal {
   uid: string;
@@ -26,44 +29,19 @@ interface Animal {
   feline: boolean;
 }
 
-class App extends Component<Record<string, never>, AppState> {
-  constructor(props: Record<string, never>) {
-    super(props);
-    this.state = {
-      results: [],
-      isLoading: false,
-      hasError: false,
-      isErrBtnClicked: false,
-    };
-  }
+const App = () => {
+  const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isErrBtnClicked, setIsErrBtnClicked] = useState(false);
+  // const [searchTerm, setSearchTerm] = useSearchTerm();
 
-  componentDidMount() {
-    const savedSearchTerm = localStorage.getItem('searchTerm') || '';
-    this.handleSearch(savedSearchTerm);
-  }
-
-  handleSearch = async (searchTerm: string) => {
-    this.setState({ isLoading: true });
-
-    const pageNumber = 0;
-    const pageSize = 15;
-
-    const apiEndpoint = `https://stapi.co/api/v1/rest/animal/search?pageNumber=${pageNumber}&pageSize=${pageSize}&title=${searchTerm}&name=${searchTerm}`;
+  const handleSearch = async (searchTerm: string) => {
+    setIsLoading(true);
 
     try {
-      const response = await fetch(apiEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
+      const data = await searchAnimals(searchTerm);
       const results = data.animals.map((animal: Animal) => {
-        const descriptions: string[] = [];
+        const descriptions = [];
         if (animal.earthAnimal) descriptions.push('Earth Animal 🐾');
         if (animal.earthInsect) descriptions.push('Earth Insect 🦗');
         if (animal.avian) descriptions.push('Avian 🦜');
@@ -80,35 +58,47 @@ class App extends Component<Record<string, never>, AppState> {
         };
       });
 
-      this.setState({ results, isLoading: false });
+      setResults(results);
     } catch (error) {
       console.error('Error fetching data:', error);
-      this.setState({ isLoading: false });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  handleErrorButtonClick = () => {
-    this.setState({ isErrBtnClicked: true });
+  useEffect(() => {
+    const savedSearchTerm = localStorage.getItem('searchTerm') || '';
+    handleSearch(savedSearchTerm);
+  }, []);
+
+  const handleErrorButtonClick = () => {
+    setIsErrBtnClicked(true);
   };
 
-  render() {
-    if (this.state.isErrBtnClicked) {
-      throw new Error('Test Error');
-    }
-    return (
+  const handleRestartClick = () => {
+    const savedSearchTerm = localStorage.getItem('searchTerm') || '';
+    handleSearch(savedSearchTerm);
+  };
+
+  if (isErrBtnClicked) {
+    throw new Error('Test Error');
+  }
+
+  return (
+    <ErrorBoundary onRestart={handleRestartClick}>
       <div className="App">
         <div className="top-section">
-          <Search onSearch={this.handleSearch} />
+          <Search onSearch={handleSearch} />
         </div>
         <div className="bottom-section">
-          {this.state.isLoading ? (
+          {isLoading ? (
             <div className="loader-container">
               <div className="loader"></div>
             </div>
           ) : (
             <>
-              {this.state.results.length > 0 ? (
-                <SearchResults results={this.state.results} />
+              {results.length > 0 ? (
+                <SearchResults results={results} />
               ) : (
                 <div className="nothing-found">
                   No animal found. Try again😸
@@ -117,12 +107,12 @@ class App extends Component<Record<string, never>, AppState> {
             </>
           )}
         </div>
-        <button className="error-button" onClick={this.handleErrorButtonClick}>
+        <button className="error-button" onClick={handleErrorButtonClick}>
           Throw Error
         </button>
       </div>
-    );
-  }
-}
+    </ErrorBoundary>
+  );
+};
 
 export default App;
