@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../App.css';
 import Search from './search';
 import SearchResults from './searchResults';
@@ -20,52 +21,61 @@ const Home = () => {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isErrBtnClicked, setIsErrBtnClicked] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  const handleSearch = async (searchTerm: string, page: number = 0) => {
-    setIsLoading(true);
+  const navigate = useNavigate();
+  const { page } = useParams<{ page?: string }>();
 
-    try {
-      const data = await searchAnimals(searchTerm, page);
-      const currentPage = data.page.pageNumber;
-      const totalPages = data.page.totalPages;
-      const results = data.animals.map((animal: Animal) => {
-        const descriptions = [];
-        if (animal.earthAnimal) descriptions.push('Earth Animal 🐾');
-        if (animal.earthInsect) descriptions.push('Earth Insect 🦗');
-        if (animal.avian) descriptions.push('Avian 🦜');
-        if (animal.canine) descriptions.push('Canine 🐶');
-        if (animal.feline) descriptions.push('Feline 😺');
-        if (descriptions.length === 0) {
-          descriptions.push('an infinitely cute animal 👻');
-        }
+  const handleSearch = useCallback(
+    async (searchTerm: string, page: number = 1) => {
+      setIsLoading(true);
 
-        return {
-          uid: animal.uid,
-          name: animal.name,
-          descriptions,
-        };
-      });
+      try {
+        const data = await searchAnimals(searchTerm, page - 1);
+        const newPage = data.page.pageNumber + 1;
+        const totalPages = data.page.totalPages;
+        const results = data.animals.map((animal: Animal) => {
+          const descriptions = [];
+          if (animal.earthAnimal) descriptions.push('Earth Animal 🐾');
+          if (animal.earthInsect) descriptions.push('Earth Insect 🦗');
+          if (animal.avian) descriptions.push('Avian 🦜');
+          if (animal.canine) descriptions.push('Canine 🐶');
+          if (animal.feline) descriptions.push('Feline 😺');
+          if (descriptions.length === 0) {
+            descriptions.push('an infinitely cute animal 👻');
+          }
 
-      setResults(results);
-      setCurrentPage(currentPage);
-      setTotalPages(totalPages);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+          return {
+            uid: animal.uid,
+            name: animal.name,
+            descriptions,
+          };
+        });
+
+        setResults(results);
+        setCurrentPage(newPage);
+        setTotalPages(totalPages);
+        navigate(`/search/${newPage}`);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [navigate],
+  );
 
   useEffect(() => {
     const savedSearchTerm = localStorage.getItem('searchTerm') || '';
-    handleSearch(savedSearchTerm);
-  }, []);
+    const pageNumber = page ? parseInt(page, 10) : 1;
+    setCurrentPage(pageNumber);
+    handleSearch(savedSearchTerm, pageNumber);
+  }, [page, handleSearch]);
 
-  const handlePageChange = (page: number) => {
+  const handlePageChange = (newPage: number) => {
     const savedSearchTerm = localStorage.getItem('searchTerm') || '';
-    handleSearch(savedSearchTerm, page);
+    handleSearch(savedSearchTerm, newPage);
   };
 
   const handleErrorButtonClick = () => {

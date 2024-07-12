@@ -6,7 +6,7 @@
 }
 
 .App {
-  height: 530px;
+  height: 600px;
   padding: 50px;
   background-color: rgba(238, 250, 213, 0.199);
   border-radius: 15px;
@@ -16,6 +16,10 @@
   display: flex;
   gap: 15px;
   justify-content: center;
+}
+
+.search-results {
+  height: 450px;
 }
 
 input::placeholder {
@@ -34,7 +38,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 350px;
+  height: 450px;
 }
 
 .loader {
