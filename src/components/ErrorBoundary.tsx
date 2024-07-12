@@ -2,7 +2,7 @@ import { Component, ErrorInfo, ReactNode } from 'react';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
-  onRestart: () => void;
+  // onRestart: () => void;
 }
 
 interface ErrorBoundaryState {
@@ -25,7 +25,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   handleRestartClick = () => {
     this.setState({ hasError: false });
-    this.props.onRestart();
+    // this.props.onRestart();
   };
 
   render() {
