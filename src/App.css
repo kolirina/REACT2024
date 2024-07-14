@@ -6,7 +6,7 @@
 }
 
 .App {
-  height: 600px;
+  height: 630px;
   padding: 50px;
   background-color: rgba(238, 250, 213, 0.199);
   border-radius: 15px;
@@ -74,6 +74,7 @@ ul {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 25px;
 }
 
 .left-section,

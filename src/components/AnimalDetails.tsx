@@ -73,7 +73,7 @@ const AnimalDetails: React.FC = () => {
   if (isLoading) {
     return (
       <div className="loader-container">
-        <div className="loader"></div>
+        <div className="loader">Loading</div>
       </div>
     );
   }
