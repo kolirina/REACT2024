@@ -1,12 +1,3 @@
-// import { render, screen } from '@testing-library/react';
-// import AnimalDetails from './AnimalDetails';
-
-// it('should have search results', () => {
-//   render(<AnimalDetails />);
-//   const title = screen.queryByText(/Not Found/i);
-//   expect(title).toBeVisible();
-// });
-
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { vi } from 'vitest';
@@ -14,12 +5,15 @@ import AnimalDetails from './AnimalDetails';
 import { getAnimalDetails } from '../services/api';
 
 vi.mock('react-router-dom', async (importOriginal) => {
-  const actual = await importOriginal();
+  const actual = (await importOriginal()) as {
+    [key: string]: unknown;
+  };
+
   return {
     ...actual,
-    BrowserRouter: actual.BrowserRouter,
-    useParams: () => ({ id: '1' }), // mock useParams to return an id
-    useOutletContext: () => ({ setShowingAnimalDetails: vi.fn() }), // mock useOutletContext
+    BrowserRouter: actual.BrowserRouter as React.ComponentType,
+    useParams: () => ({ id: '1' }),
+    useOutletContext: () => ({ setShowingAnimalDetails: vi.fn() }),
   };
 });
 
@@ -28,9 +22,9 @@ vi.mock('../services/api', () => ({
 }));
 
 describe('AnimalDetails Component', () => {
-  it('displays a loading indicator while fetching data', async () => {
+  it('displays a loading indicator while fetching data', () => {
     vi.mocked(getAnimalDetails).mockImplementationOnce(
-      () => new Promise(() => {}), // Keep promise pending
+      () => new Promise(() => {}),
     );
 
     render(

@@ -83,7 +83,7 @@ const AnimalDetails: React.FC = () => {
   }
 
   return (
-    <div className="animal-details">
+    <div data-testid="animal-details" className="animal-details">
       <h2>{animal.name}</h2>
       <p>{animal.description}</p>
       <Link to={'/'}>Hide Details</Link>

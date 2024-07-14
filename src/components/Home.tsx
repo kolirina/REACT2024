@@ -97,7 +97,7 @@ const Home = () => {
 
   return (
     <ErrorBoundary>
-      <div className="App">
+      <div data-testid="home" className="App">
         <div className="top-section">
           <Search
             onSearch={(term) => setSearchParams({ search: term, page: '1' })}
@@ -107,7 +107,7 @@ const Home = () => {
           <div className="left-section" onClick={handleLeftSectionClick}>
             {isLoading ? (
               <div className="loader-container">
-                <div className="loader"></div>
+                <div className="loader">Loading</div>
               </div>
             ) : (
               <>

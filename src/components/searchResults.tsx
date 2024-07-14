@@ -23,15 +23,19 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
   return (
     <div className="search-results">
       <h2>Search Results</h2>
-      <ul>
-        {results.map((result, index) => (
-          <li key={index}>
-            <Link to={createLink(result.uid)} className="animalLink">
-              <strong>{result.name}</strong>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {results.length > 0 ? (
+        <ul>
+          {results.map((result, index) => (
+            <li key={index}>
+              <Link to={createLink(result.uid)} className="animalLink">
+                <strong>{result.name}</strong>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div>No animal found. Try again😸</div>
+      )}
     </div>
   );
 };
