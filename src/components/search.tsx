@@ -1,47 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+
 interface SearchProps {
   onSearch: (searchTerm: string) => void;
 }
 
-interface SearchState {
-  searchTerm: string;
-}
+const Search: React.FC<SearchProps> = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
-class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-
+  useEffect(() => {
     const savedSearchTerm = localStorage.getItem('searchTerm') || '';
+    setSearchTerm(savedSearchTerm);
+  }, []);
 
-    this.state = {
-      searchTerm: savedSearchTerm,
-    };
-  }
-
-  handleSubmit = () => {
-    const searchTerm = this.state.searchTerm.trim();
-    this.setState({ searchTerm });
-    localStorage.setItem('searchTerm', searchTerm);
-    this.props.onSearch(searchTerm);
+  const handleSubmit = () => {
+    const trimmedSearchTerm = searchTerm.trim();
+    setSearchTerm(trimmedSearchTerm);
+    localStorage.setItem('searchTerm', trimmedSearchTerm);
+    onSearch(trimmedSearchTerm);
   };
 
-  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchTerm: e.target.value });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
-  render() {
-    return (
-      <div className="top-section">
-        <input
-          type="text"
-          value={this.state.searchTerm}
-          onChange={this.handleInputChange}
-          placeholder="Find an Animal 🔍"
-        />
-        <button onClick={this.handleSubmit}>Search</button>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="top-section">
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleInputChange}
+        placeholder="Find an Animal 🔍"
+      />
+      <button onClick={handleSubmit}>Search</button>
+    </div>
+  );
+};
 
 export default Search;

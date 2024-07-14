@@ -23,7 +23,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   handleRestartClick = () => {
-    window.location.reload();
+    this.setState({ hasError: false });
   };
 
   render() {

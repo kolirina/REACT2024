@@ -1,31 +1,43 @@
-import { Component } from 'react';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 interface AnimalInfo {
   uid: string;
   name: string;
-  descriptions: string[];
+  descriptions?: string[];
 }
 
 interface SearchResultsProps {
   results: AnimalInfo[];
 }
 
-class SearchResults extends Component<SearchResultsProps> {
-  render() {
-    return (
-      <div className="search-results">
-        <h2>Search Results</h2>
+const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
+  const location = useLocation();
+
+  const createLink = (id: string) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set('details', id);
+    return `/details/${id}`;
+  };
+
+  return (
+    <div className="search-results">
+      <h2>Search Results</h2>
+      {results.length > 0 ? (
         <ul>
-          {this.props.results.map((result, index) => (
+          {results.map((result, index) => (
             <li key={index}>
-              <strong>{result.name}</strong>: {result.name} is{' '}
-              {result.descriptions.join(' and ')}
+              <Link to={createLink(result.uid)} className="animalLink">
+                <strong>{result.name}</strong>
+              </Link>
             </li>
           ))}
         </ul>
-      </div>
-    );
-  }
-}
+      ) : (
+        <div>No animal found. Try again😸</div>
+      )}
+    </div>
+  );
+};
 
 export default SearchResults;

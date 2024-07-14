@@ -1,0 +1,27 @@
+// import React, { createContext, useContext, useState } from 'react';
+
+// export interface OutletContextType {
+//   setShowingAnimalDetails: (value: boolean) => void;
+// }
+
+// const OutletContext = createContext<OutletContextType | undefined>(undefined);
+
+// export const useOutletContext = () => {
+//   const context = useContext(OutletContext);
+//   if (!context) {
+//     throw new Error(
+//       'useOutletContext must be used within an OutletContextProvider',
+//     );
+//   }
+//   return context;
+// };
+
+// export const OutletContextProvider: React.FC = ({ children }) => {
+//   const [showingAnimalDetails, setShowingAnimalDetails] = useState(false);
+
+//   return (
+//     <OutletContext.Provider value={{ setShowingAnimalDetails }}>
+//       {children} {/* Ensure children are passed through */}
+//     </OutletContext.Provider>
+//   );
+// };
