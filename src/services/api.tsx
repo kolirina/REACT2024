@@ -19,7 +19,7 @@ export const searchAnimals = async (
 };
 
 export const getAnimalDetails = async (id: string) => {
-  const apiEndpoint = `https://stapi.co/api/v1/rest/animal/${id}`;
+  const apiEndpoint = `https://stapi.co/api/v1/rest/animal?uid=${id}`;
   const response = await fetch(apiEndpoint, {
     method: 'GET',
   });

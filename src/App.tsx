@@ -1,19 +1,21 @@
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary';
-import { Route, Routes } from 'react-router-dom';
-import Hi from './components/Hi';
 import Home from './components/Home';
+import AnimalDetails from './components/AnimalDetails';
 import NotFound from './components/NotFound';
 
 const App = () => {
   return (
     <ErrorBoundary>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/hi" element={<Hi />} />
-        <Route path="/search/:page" element={<Home />} />
-        <Route path="/*" element={<NotFound />} />
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="details/:id" element={<AnimalDetails />} />
+            <Route path="hi" element={<AnimalDetails />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </ErrorBoundary>
   );
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useSearchParams, Outlet } from 'react-router-dom';
 import '../App.css';
 import Search from './search';
 import SearchResults from './searchResults';
@@ -18,14 +18,13 @@ interface Animal {
 }
 
 const Home = () => {
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<Animal[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isErrBtnClicked, setIsErrBtnClicked] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-
-  const navigate = useNavigate();
-  const { page } = useParams<{ page?: string }>();
+  const [currentSearchTerm, setCurrentSearchTerm] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearch = useCallback(
     async (searchTerm: string, page: number = 1) => {
@@ -56,27 +55,28 @@ const Home = () => {
         setResults(results);
         setCurrentPage(newPage);
         setTotalPages(totalPages);
-        navigate(`/search/${newPage}`);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
         setIsLoading(false);
       }
     },
-    [navigate],
+    [],
   );
 
   useEffect(() => {
     const savedSearchTerm = localStorage.getItem('searchTerm') || '';
-    const pageNumber = page ? parseInt(page, 10) : 1;
-    setCurrentPage(pageNumber);
-    handleSearch(savedSearchTerm, pageNumber);
-  }, [page, handleSearch]);
+    const pageNumber = parseInt(searchParams.get('page') || '1', 10);
 
-  const handlePageChange = (newPage: number) => {
-    const savedSearchTerm = localStorage.getItem('searchTerm') || '';
-    handleSearch(savedSearchTerm, newPage);
-  };
+    if (savedSearchTerm !== currentSearchTerm || !currentSearchTerm) {
+      setCurrentSearchTerm(savedSearchTerm);
+      setCurrentPage(1);
+      handleSearch(savedSearchTerm, 1);
+    } else if (pageNumber !== currentPage) {
+      setCurrentPage(pageNumber);
+      handleSearch(savedSearchTerm, pageNumber);
+    }
+  }, [searchParams, currentSearchTerm, currentPage, handleSearch]);
 
   const handleErrorButtonClick = () => {
     setIsErrBtnClicked(true);
@@ -90,35 +90,38 @@ const Home = () => {
     <ErrorBoundary>
       <div className="App">
         <div className="top-section">
-          <Search onSearch={handleSearch} currentPage={currentPage} />
+          <Search
+            onSearch={(term) => setSearchParams({ search: term, page: '1' })}
+          />
         </div>
-        <div className="bottom-section">
-          {isLoading ? (
-            <div className="loader-container">
-              <div className="loader"></div>
+        <div className="content-section">
+          <div className="left-section">
+            {isLoading ? (
+              <div className="loader-container">
+                <div className="loader"></div>
+              </div>
+            ) : (
+              <>
+                {results.length > 0 ? (
+                  <SearchResults results={results} />
+                ) : (
+                  <div className="nothing-found">
+                    No animal found. Try again😸
+                  </div>
+                )}
+              </>
+            )}
+            <div className="pagination">
+              <Pagination currentPage={currentPage} totalPages={totalPages} />
             </div>
-          ) : (
-            <>
-              {results.length > 0 ? (
-                <SearchResults results={results} />
-              ) : (
-                <div className="nothing-found">
-                  No animal found. Try again😸
-                </div>
-              )}
-            </>
-          )}
+          </div>
+          <div className="right-section">
+            <Outlet />
+          </div>
         </div>
         <button className="error-button" onClick={handleErrorButtonClick}>
           Throw Error
         </button>
-        <div className="pagination">
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </div>
       </div>
     </ErrorBoundary>
   );

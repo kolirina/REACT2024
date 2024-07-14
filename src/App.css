@@ -20,6 +20,7 @@
 
 .search-results {
   height: 450px;
+  text-align: center;
 }
 
 input::placeholder {
@@ -28,6 +29,7 @@ input::placeholder {
 
 ul {
   list-style-type: none;
+  padding-inline-start: 0;
 }
 
 .error-button {
@@ -65,6 +67,38 @@ ul {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.content-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-section,
+.right-section {
+  padding: 10px;
+}
+
+.loader-container {
+  text-align: center;
+}
+
+.nothing-found {
+  text-align: center;
+  font-size: 1.5em;
+  color: #888;
+}
+
+.animalLink {
+  text-decoration: none;
+  color: rgba(10, 33, 68, 0.87);
+}
+
+.pagination {
+  text-align: center;
+  margin: 20px 0;
 }
 
 @media screen and (max-width: 805px) {
