@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useOutletContext } from 'react-router-dom';
 import { getAnimalDetails } from '../services/api';
 
 interface Animal {
@@ -14,6 +14,9 @@ interface Animal {
 }
 
 const AnimalDetails: React.FC = () => {
+  const { setShowingAnimalDetails } = useOutletContext<{
+    setShowingAnimalDetails: (value: boolean) => void;
+  }>();
   const [animal, setAnimal] = useState<Animal | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
@@ -59,6 +62,13 @@ const AnimalDetails: React.FC = () => {
 
     fetchAnimalDetails();
   }, [id]);
+
+  useEffect(() => {
+    setShowingAnimalDetails(true);
+    return () => {
+      setShowingAnimalDetails(false);
+    };
+  }, [setShowingAnimalDetails]);
 
   if (isLoading) {
     return (

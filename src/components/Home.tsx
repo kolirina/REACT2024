@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useSearchParams, Outlet } from 'react-router-dom';
+import { useSearchParams, Outlet, useNavigate } from 'react-router-dom';
 import '../App.css';
 import Search from './search';
 import SearchResults from './searchResults';
@@ -25,6 +25,8 @@ const Home = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [currentSearchTerm, setCurrentSearchTerm] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [showingAnimalDetails, setShowingAnimalDetails] = useState(false);
 
   const handleSearch = useCallback(
     async (searchTerm: string, page: number = 1) => {
@@ -86,6 +88,13 @@ const Home = () => {
     throw new Error('Test Error');
   }
 
+  const handleLeftSectionClick = () => {
+    if (showingAnimalDetails) {
+      navigate('/');
+      setShowingAnimalDetails(false);
+    }
+  };
+
   return (
     <ErrorBoundary>
       <div className="App">
@@ -95,7 +104,7 @@ const Home = () => {
           />
         </div>
         <div className="content-section">
-          <div className="left-section">
+          <div className="left-section" onClick={handleLeftSectionClick}>
             {isLoading ? (
               <div className="loader-container">
                 <div className="loader"></div>
@@ -116,7 +125,7 @@ const Home = () => {
             </div>
           </div>
           <div className="right-section">
-            <Outlet />
+            <Outlet context={{ setShowingAnimalDetails }} />
           </div>
         </div>
         <button className="error-button" onClick={handleErrorButtonClick}>
