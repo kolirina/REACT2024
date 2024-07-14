@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|scss|md)\"",
-    "prepare": "lint-staged",
+    "prepare": "husky",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
@@ -65,7 +65,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm test"
+      "pre-push": "npx vitest --watch=false"
     }
   }
 }
