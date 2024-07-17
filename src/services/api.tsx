@@ -1,9 +1,11 @@
+import { SEARCH_URL } from '../constants';
+
 export const searchAnimals = async (
   searchTerm: string,
   currentPage = 0,
   pageSize = 15,
 ) => {
-  const apiEndpoint = `https://stapi.co/api/v1/rest/animal/search?pageNumber=${currentPage}&pageSize=${pageSize}&title=${searchTerm}&name=${searchTerm}`;
+  const apiEndpoint = `${SEARCH_URL}/search?pageNumber=${currentPage}&pageSize=${pageSize}&title=${searchTerm}&name=${searchTerm}`;
   const response = await fetch(apiEndpoint, {
     method: 'POST',
     headers: {
@@ -19,7 +21,7 @@ export const searchAnimals = async (
 };
 
 export const getAnimalDetails = async (id: string) => {
-  const apiEndpoint = `https://stapi.co/api/v1/rest/animal?uid=${id}`;
+  const apiEndpoint = `${SEARCH_URL}?uid=${id}`;
   const response = await fetch(apiEndpoint, {
     method: 'GET',
   });

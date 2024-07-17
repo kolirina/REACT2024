@@ -3,7 +3,6 @@ import { searchAnimals, getAnimalDetails } from './api';
 
 describe('API functions', () => {
   beforeAll(() => {
-    // Mocking global fetch
     global.fetch = vi.fn();
   });
 
