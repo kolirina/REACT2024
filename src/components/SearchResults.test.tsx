@@ -7,6 +7,7 @@ import SearchResults from './searchResults';
 //   { uid: '1', name: 'Animal 1', descriptions: ['Earth Animal 🐾'] },
 //   { uid: '2', name: 'Animal 2', descriptions: ['Avian 🦜'] },
 // ];
+//test
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
