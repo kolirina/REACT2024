@@ -96,6 +96,66 @@ ul {
   color: rgba(10, 33, 68, 0.87);
 }
 
+.light-checkbox {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: #8bb4cf79;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.light-checkbox:checked {
+  background-color: #e689d234;
+  border-color: #e689d234;
+}
+
+.light-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  clip-path: polygon(14% 44%, 0% 65%, 50% 100%, 100% 29%, 83% 14%, 43% 62%);
+  transform: translate(-50%, -50%);
+}
+
+/* .light-checkbox {
+  appearance: none;
+  width: 10px;
+  height: 20px;
+  background-color: #c9a6f728;
+  border: 1px solid #c9a6f728;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.light-checkbox:checked {
+  background-color: #e689d234;
+  border-color: #e689d234;
+}
+
+.light-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  clip-path: polygon(14% 44%, 0% 65%, 50% 100%, 100% 29%, 83% 14%, 43% 62%);
+} */
+
 .pagination {
   text-align: center;
   margin: 20px 0;

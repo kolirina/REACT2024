@@ -27,6 +27,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
         <ul>
           {results.map((result, index) => (
             <li key={index}>
+              <input className="light-checkbox" type="checkbox"></input>
               <Link to={createLink(result.uid)} className="animalLink">
                 <strong>{result.name}</strong>
               </Link>
