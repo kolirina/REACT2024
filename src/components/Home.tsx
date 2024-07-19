@@ -6,6 +6,7 @@ import SearchResults from './searchResults';
 import { searchAnimals } from '../services/api';
 import ErrorBoundary from './ErrorBoundary';
 import Pagination from './Pagination';
+import Flyout from './Flyout';
 
 interface Animal {
   uid: string;
@@ -124,6 +125,7 @@ const Home = () => {
               <Pagination currentPage={currentPage} totalPages={totalPages} />
             </div>
           </div>
+          <Flyout />
           <div className="right-section">
             <Outlet context={{ setShowingAnimalDetails }} />
           </div>

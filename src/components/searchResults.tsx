@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Checkbox from './Checkbox';
 
 interface AnimalInfo {
   uid: string;
@@ -12,14 +13,6 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
-  const location = useLocation();
-
-  const createLink = (id: string) => {
-    const searchParams = new URLSearchParams(location.search);
-    searchParams.set('details', id);
-    return `/details/${id}`;
-  };
-
   return (
     <div className="search-results">
       <h2>Search Results</h2>
@@ -27,10 +20,18 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
         <ul>
           {results.map((result, index) => (
             <li key={index}>
-              <input className="light-checkbox" type="checkbox"></input>
-              <Link to={createLink(result.uid)} className="animalLink">
-                <strong>{result.name}</strong>
-              </Link>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Checkbox
+                  item={{
+                    uid: result.uid,
+                    name: result.name,
+                    description: result.descriptions?.join(', ') || '',
+                  }}
+                />
+                <Link to={`/details/${result.uid}`} className="animalLink">
+                  <strong>{result.name}</strong>
+                </Link>
+              </div>
             </li>
           ))}
         </ul>

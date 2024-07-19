@@ -3,7 +3,10 @@
   line-height: 1.5;
   font-weight: 400;
   color: rgba(10, 33, 68, 0.87);
-  background-color: #c9dae2;
+  /* background-color: #c9dae2; */
+  background-image: url('./assets/background.jpg');
+  background-size: cover; /* Adjust the size of the image to cover the entire area */
+  background-position: center; /* Center the image */
 }
 
 body {

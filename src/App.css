@@ -8,7 +8,7 @@
 .App {
   height: 630px;
   padding: 50px;
-  background-color: rgba(238, 250, 213, 0.199);
+  background-color: rgba(238, 250, 213, 0.37);
   border-radius: 15px;
 }
 
@@ -125,6 +125,29 @@ ul {
   background-color: white;
   clip-path: polygon(14% 44%, 0% 65%, 50% 100%, 100% 29%, 83% 14%, 43% 62%);
   transform: translate(-50%, -50%);
+}
+
+/* index.css */
+
+.flyout {
+  position: fixed;
+  bottom: 0;
+  /* left: 0; */
+  width: 100%;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  padding: 20px;
+  padding-right: 20px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flyout button,
+.flyout p {
+  margin-left: 10px;
+  margin-right: 15px;
 }
 
 /* .light-checkbox {
