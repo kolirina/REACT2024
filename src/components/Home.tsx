@@ -68,7 +68,7 @@ const Home = () => {
   );
 
   useEffect(() => {
-    const savedSearchTerm = localStorage.getItem('searchTerm') || '';
+    const savedSearchTerm = localStorage.getItem('searchTerm') || ' ';
     const pageNumber = parseInt(searchParams.get('page') || '1', 10);
 
     if (savedSearchTerm !== currentSearchTerm || !currentSearchTerm) {
