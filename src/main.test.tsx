@@ -2,15 +2,19 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import ErrorBoundary from './components/ErrorBoundary';
 import { screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 test('main.tsx', async () => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
   ReactDOM.createRoot(container).render(
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>,
+    <Provider store={store}>
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    </Provider>,
   );
 
   await screen.findByText(/Page/i);
