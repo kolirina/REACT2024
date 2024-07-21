@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/store/selectedItemsSlice.tsx</title>
+    <title>Code coverage report for src/slices/selectedItemsSlice.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/store</a> selectedItemsSlice.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/slices</a> selectedItemsSlice.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">53.12% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/24</span>
+                <span class='fraction'>17/32</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">53.12% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/24</span>
+                <span class='fraction'>17/32</span>
             </div>
         
             
@@ -101,12 +101,9 @@
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -124,12 +121,20 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -137,15 +142,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-&nbsp;
-interface SelectedItem {
-  uid: string;
-  name: string;
-  description: string;
-}
+import { SelectedItem } from '../types';
 &nbsp;
 interface SelectedItemsState {
   items: SelectedItem[];
@@ -160,9 +159,7 @@ const selectedItemsSlice = createSlice({
   initialState,
   reducers: {
     selectItem: <span class="fstat-no" title="function not covered" >(state, action: PayloadAction&lt;SelectedItem&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      if (!state.items.some((item) =&gt; item.uid === action.payload.uid)) {</span>
-<span class="cstat-no" title="statement not covered" >        state.items.push(action.payload);</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >      state.items.push(action.payload);</span>
 <span class="cstat-no" title="statement not covered" >    },</span>
     unselectItem: <span class="fstat-no" title="function not covered" >(state, action: PayloadAction&lt;string&gt;) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      state.items = state.items.filter((item) =&gt; item.uid !== action.payload);</span>
@@ -170,12 +167,21 @@ const selectedItemsSlice = createSlice({
     unselectAll: <span class="fstat-no" title="function not covered" >(state) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      state.items = [];</span>
 <span class="cstat-no" title="statement not covered" >    },</span>
+    toggleItem: <span class="fstat-no" title="function not covered" >(state, action: PayloadAction&lt;SelectedItem&gt;) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      const index = state.items.findIndex(</span>
+<span class="cstat-no" title="statement not covered" >        (item) =&gt; item.uid === action.payload.uid,</span>
+<span class="cstat-no" title="statement not covered" >      );</span>
+<span class="cstat-no" title="statement not covered" >      if (index === -1) {</span>
+<span class="cstat-no" title="statement not covered" >        state.items.push(action.payload);</span>
+<span class="cstat-no" title="statement not covered" >      } else {</span>
+<span class="cstat-no" title="statement not covered" >        state.items.splice(index, 1);</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
   },
 });
 &nbsp;
-export const { selectItem, unselectItem, unselectAll } =
+export const { selectItem, unselectItem, unselectAll, toggleItem } =
   selectedItemsSlice.actions;
-&nbsp;
 export default selectedItemsSlice.reducer;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -184,7 +190,7 @@ export default selectedItemsSlice.reducer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-19T16:39:57.554Z
+                at 2024-07-21T12:40:30.272Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

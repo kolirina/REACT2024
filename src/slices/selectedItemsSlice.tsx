@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface SelectedItem {
-  uid: string;
-  name: string;
-  description: string;
-}
+import { SelectedItem } from '../types';
 
 interface SelectedItemsState {
   items: SelectedItem[];
@@ -19,9 +14,7 @@ const selectedItemsSlice = createSlice({
   initialState,
   reducers: {
     selectItem: (state, action: PayloadAction<SelectedItem>) => {
-      if (!state.items.some((item) => item.uid === action.payload.uid)) {
-        state.items.push(action.payload);
-      }
+      state.items.push(action.payload);
     },
     unselectItem: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.uid !== action.payload);
@@ -29,10 +22,19 @@ const selectedItemsSlice = createSlice({
     unselectAll: (state) => {
       state.items = [];
     },
+    toggleItem: (state, action: PayloadAction<SelectedItem>) => {
+      const index = state.items.findIndex(
+        (item) => item.uid === action.payload.uid,
+      );
+      if (index === -1) {
+        state.items.push(action.payload);
+      } else {
+        state.items.splice(index, 1);
+      }
+    },
   },
 });
 
-export const { selectItem, unselectItem, unselectAll } =
+export const { selectItem, unselectItem, unselectAll, toggleItem } =
   selectedItemsSlice.actions;
-
 export default selectedItemsSlice.reducer;
