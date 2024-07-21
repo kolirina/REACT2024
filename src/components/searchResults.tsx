@@ -2,12 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Checkbox from './Checkbox';
 import { Animal } from '../types';
+import { useTheme } from '../hooks/useTheme';
+import '../App.css';
 
 interface SearchResultsProps {
   results: Animal[];
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
+  const darkTheme = useTheme();
   return (
     <div className="search-results">
       <h2>Search Results</h2>
@@ -17,7 +20,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
             <li key={result.uid}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Checkbox item={result} />
-                <Link to={`/details/${result.uid}`} className="animalLink">
+                <Link
+                  to={`/details/${result.uid}`}
+                  className={darkTheme ? 'dark-animalLink' : 'light-animalLink'}
+                >
                   <strong>{result.name}</strong>
                 </Link>
               </div>

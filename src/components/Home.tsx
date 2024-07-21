@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTheme, useThemeUpdate } from '../hooks/useTheme';
 import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams, Outlet } from 'react-router-dom';
 import { useSearchAnimalsQuery } from '../services/apiSlice';
@@ -11,6 +12,8 @@ import Flyout from './Flyout';
 import '../App.css';
 
 const Home = () => {
+  const darkTheme = useTheme();
+  const toggleTheme = useThemeUpdate();
   const dispatch = useDispatch();
   const selectedItems = useSelector(
     (state: RootState) => state.selectedItems.items,
@@ -48,25 +51,30 @@ const Home = () => {
   };
 
   return (
-    <div data-testid="home" className="App">
-      <div className="top-section">
-        <Search onSearch={handleSearch} />
-      </div>
-      <div className="content-section">
-        <div className="left-section">
-          {isLoading ? (
-            <div className="loader-container">
-              <div className="loader">Loading</div>
-            </div>
-          ) : (
-            data && <SearchResults results={data.animals} />
-          )}
-          <div className="pagination">
-            <Pagination currentPage={currentPage} totalPages={totalPages} />
-          </div>
+    <div className={darkTheme ? 'dark-MainWrapper' : 'light-MainWrapper'}>
+      <button onClick={toggleTheme} className="themeButton">
+        Toggle Theme
+      </button>
+      <div data-testid="home" className={darkTheme ? 'dark-App' : 'light-App'}>
+        <div className="top-section">
+          <Search onSearch={handleSearch} />
         </div>
-        <div className="right-section">
-          <Outlet />
+        <div className="content-section">
+          <div className="left-section">
+            {isLoading ? (
+              <div className="loader-container">
+                <div className="loader">Loading</div>
+              </div>
+            ) : (
+              data && <SearchResults results={data.animals} />
+            )}
+            <div className="pagination">
+              <Pagination currentPage={currentPage} totalPages={totalPages} />
+            </div>
+          </div>
+          <div className="right-section">
+            <Outlet />
+          </div>
         </div>
       </div>
       {selectedItems.length > 0 && <Flyout />}

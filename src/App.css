@@ -1,13 +1,9 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.App {
+.light-App,
+.dark-App {
+  width: fit-content;
+  margin-top: 70px;
   padding: 50px;
-  background-color: rgba(212, 224, 219, 0.329);
+  background-color: rgba(212, 224, 219, 0.233);
   border-radius: 15px;
 }
 
@@ -90,9 +86,16 @@ ul {
   color: #888;
 }
 
-.animalLink {
+.dark-animalLink {
+  text-decoration: none;
+  color: rgba(217, 228, 235, 0.829);
+  font-weight: 100;
+}
+
+.light-animalLink {
   text-decoration: none;
   color: rgba(10, 33, 68, 0.87);
+  font-weight: 100;
 }
 
 .light-checkbox {
@@ -127,28 +130,47 @@ ul {
   transform: translate(-50%, -50%);
 }
 
-.flyout {
+.dark-flyout,
+.light-flyout {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #f9f9f9;
-  border-top: 1px solid #ddd;
-  padding: 20px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.flyout button,
-.flyout p {
-  margin-left: 10px;
-  margin-right: 55px;
+.dark-flyout {
+  background-color: rgba(7, 23, 36, 0.808);
+  border-top: 1px solid rgba(7, 23, 36, 0.808);
+}
+
+.light-flyout {
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+}
+
+.dark-flyout button,
+.light-flyout button {
+  margin: 20px;
+}
+
+.dark-flyout span,
+.light-flyout span {
+  margin-left: 20px;
 }
 
 .pagination {
   text-align: center;
+}
+
+.themeButton {
+  position: fixed;
+  right: 0;
+  top: 0;
+  margin: 20px;
 }
 
 @media screen and (max-width: 805px) {
