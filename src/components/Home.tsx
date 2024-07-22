@@ -24,6 +24,7 @@ const Home = () => {
   const totalPages = useSelector(
     (state: RootState) => state.pagination.totalPages,
   );
+  const isLoading = useSelector((state: RootState) => state.loading.isLoading);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentSearchTerm = searchParams.get('search') || '';
   const pageParam = searchParams.get('page') || '1';
@@ -33,7 +34,7 @@ const Home = () => {
     dispatch(setPage(pageNumber));
   }, [pageParam, dispatch]);
 
-  const { data, isLoading } = useSearchAnimalsQuery({
+  const { data } = useSearchAnimalsQuery({
     searchTerm: currentSearchTerm,
     pageNumber: currentPage - 1,
     pageSize: 15,
@@ -53,7 +54,7 @@ const Home = () => {
   return (
     <div className={darkTheme ? 'dark-MainWrapper' : 'light-MainWrapper'}>
       <button onClick={toggleTheme} className="themeButton">
-        Toggle Theme
+        {darkTheme ? '🌞 Light Mode' : '🌜 Dark Mode'}
       </button>
       <div data-testid="home" className={darkTheme ? 'dark-App' : 'light-App'}>
         <div className="top-section">
