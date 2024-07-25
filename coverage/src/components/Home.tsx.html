@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.78% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>67/73</span>
+                <span class='fraction'>70/75</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.54% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/11</span>
+                <span class='fraction'>9/15</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.78% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>67/73</span>
+                <span class='fraction'>70/75</span>
             </div>
         
             
@@ -148,7 +148,8 @@
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -162,6 +163,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -203,20 +205,20 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -259,6 +261,7 @@ const Home = () =&gt; {
   const totalPages = useSelector(
     (state: RootState) =&gt; state.pagination.totalPages,
   );
+  const isLoading = useSelector((state: RootState) =&gt; state.loading.isLoading);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentSearchTerm = searchParams.get('search') || '';
   const pageParam = searchParams.get('page') || '1';
@@ -268,7 +271,7 @@ const Home = () =&gt; {
     dispatch(setPage(pageNumber));
   }, [pageParam, dispatch]);
 &nbsp;
-  const { data, isLoading } = useSearchAnimalsQuery({
+  const { data } = useSearchAnimalsQuery({
     searchTerm: currentSearchTerm,
     pageNumber: currentPage - 1,
     pageSize: 15,
@@ -288,7 +291,7 @@ const Home = () =&gt; {
   return (
     &lt;div className={<span class="branch-0 cbranch-no" title="branch not covered" >darkTheme ? 'dark-MainWrapper' : '</span>light-MainWrapper'}&gt;
       &lt;button onClick={toggleTheme} className="themeButton"&gt;
-        Toggle Theme
+        {<span class="branch-0 cbranch-no" title="branch not covered" >darkTheme ? '🌞 Light Mode' : '</span>🌜 Dark Mode'}
       &lt;/button&gt;
       &lt;div data-testid="home" className={<span class="branch-0 cbranch-no" title="branch not covered" >darkTheme ? 'dark-App' : '</span>light-App'}&gt;
         &lt;div className="top-section"&gt;
@@ -299,9 +302,9 @@ const Home = () =&gt; {
             {isLoading ? (
               &lt;div className="loader-container"&gt;
                 &lt;div className="loader"&gt;Loading&lt;/div&gt;
-<span class="branch-0 cbranch-no" title="branch not covered" >              &lt;/div&gt;</span>
+              &lt;/div&gt;
             ) : (
-<span class="cstat-no" title="statement not covered" >              data &amp;&amp; &lt;SearchResults results={data.animals} /&gt;</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >              data &amp;&amp; &lt;SearchResults results={data.animals} /&gt;</span>
             )}
             &lt;div className="pagination"&gt;
               &lt;Pagination currentPage={currentPage} totalPages={totalPages} /&gt;
@@ -325,7 +328,7 @@ export default Home;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-21T18:49:59.599Z
+                at 2024-07-25T18:38:43.065Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
