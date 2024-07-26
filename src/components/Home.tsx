@@ -10,10 +10,12 @@ import SearchResults from './searchResults';
 import Pagination from './Pagination';
 import Flyout from './Flyout';
 import '../App.css';
+import { useState } from 'react';
 
 const Home = () => {
   const darkTheme = useTheme();
   const toggleTheme = useThemeUpdate();
+  const [isErrBtnClicked, setIsErrBtnClicked] = useState(false);
   const dispatch = useDispatch();
   const selectedItems = useSelector(
     (state: RootState) => state.selectedItems.items,
@@ -51,6 +53,14 @@ const Home = () => {
     dispatch(setPage(1));
   };
 
+  const handleErrorButtonClick = () => {
+    setIsErrBtnClicked(true);
+  };
+
+  if (isErrBtnClicked) {
+    throw new Error('Test Error');
+  }
+
   return (
     <div className={darkTheme ? 'dark-MainWrapper' : 'light-MainWrapper'}>
       <button onClick={toggleTheme} className="themeButton">
@@ -77,6 +87,9 @@ const Home = () => {
             <Outlet />
           </div>
         </div>
+        <button className="error-button" onClick={handleErrorButtonClick}>
+          Throw Error
+        </button>
       </div>
       {selectedItems.length > 0 && <Flyout />}
     </div>

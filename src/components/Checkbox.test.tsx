@@ -7,7 +7,6 @@ import selectedItemsReducer, { toggleItem } from '../slices/selectedItemsSlice';
 import { SelectedItem } from '../types';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 
-// Partially mock react-redux using importOriginal
 vi.mock('react-redux', async () => {
   const actual =
     await vi.importActual<typeof import('react-redux')>('react-redux');
@@ -23,39 +22,21 @@ describe('Checkbox Component', () => {
   let mockDispatch: Mock;
 
   beforeEach(() => {
-    // Create a mock dispatch function
     mockDispatch = vi.fn();
 
-    // Clear all mocks before each test
     vi.clearAllMocks();
 
-    // Set up the Redux store
     store = configureStore({
       reducer: {
         selectedItems: selectedItemsReducer,
       },
     });
-
-    // Set up useDispatch mock to return the mock dispatch
     (useDispatch as unknown as Mock).mockReturnValue(mockDispatch);
   });
-
-  //   it('should render checkbox correctly', () => {
-  //     const mockItem: SelectedItem = { uid: '1', name: 'Test Item' };
-
-  //     render(
-  //       <Provider store={store}>
-  //         <Checkbox item={mockItem} />
-  //       </Provider>,
-  //     );
-
-  //     expect(screen.getByRole('checkbox')).toBeInTheDocument();
-  //   });
 
   it('should be checked if item is selected', () => {
     const mockItem: SelectedItem = { uid: '1', name: 'Test Item' };
 
-    // Mock useSelector to return selected items including mockItem
     (useSelector as unknown as Mock).mockReturnValue([mockItem]);
 
     render(
@@ -70,7 +51,6 @@ describe('Checkbox Component', () => {
   it('should be unchecked if item is not selected', () => {
     const mockItem: SelectedItem = { uid: '1', name: 'Test Item' };
 
-    // Mock useSelector to return an empty array (no selected items)
     (useSelector as unknown as Mock).mockReturnValue([]);
 
     render(

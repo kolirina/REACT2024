@@ -1,4 +1,5 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { useTheme } from '../hooks/useTheme';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -28,16 +29,22 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   render() {
     if (this.state.hasError) {
-      return (
-        <>
-          <h2>Something went wrong🙀</h2>
-          <button onClick={this.handleRestartClick}>Restart</button>
-        </>
-      );
+      return <ErrorFallback />;
     }
 
     return this.props.children;
   }
 }
+
+const ErrorFallback: React.FC = () => {
+  const darkTheme = useTheme();
+
+  return (
+    <div className={darkTheme ? 'dark-ErrorBoundary' : 'light-ErrorBoundary'}>
+      <h2>Something went wrong 🙀</h2>
+      <button onClick={() => window.location.reload()}>Restart</button>
+    </div>
+  );
+};
 
 export default ErrorBoundary;

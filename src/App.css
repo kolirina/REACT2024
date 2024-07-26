@@ -8,7 +8,6 @@ html {
 }
 
 #root {
-  height: 100%;
   width: 100%;
   text-align: center;
   font-family: Inter, system-ui, Helvetica, Arial, sans-serif;
@@ -98,7 +97,6 @@ button:hover {
 }
 
 .search-results {
-  height: 450px;
   text-align: center;
 }
 
@@ -112,7 +110,7 @@ ul {
 }
 
 .error-button {
-  background-color: #76bb9181;
+  background-color: #32947fbe;
 }
 
 .loader-container {
@@ -255,6 +253,41 @@ ul {
   right: 0;
   top: 0;
   margin: 20px;
+}
+
+.pagination {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.dark-ErrorBoundary,
+.light-ErrorBoundary,
+.dark-NotFound,
+.light-NotFound {
+  height: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark-ErrorBoundary,
+.dark-NotFound {
+  background-color: #0d0d14;
+  color: #ffffffc9;
+  text-align: center;
+  padding: 20px;
+}
+
+.light-ErrorBoundary,
+.light-NotFound {
+  background-color: #c9bdd8a8;
+  color: #333;
+  text-align: center;
+  padding: 20px;
 }
 
 @media screen and (max-width: 805px) {

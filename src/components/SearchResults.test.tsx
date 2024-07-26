@@ -1,87 +1,57 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider, useDispatch } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import { vi, describe, it, expect, Mock } from 'vitest';
-import Checkbox from './Checkbox';
-import selectedItemsReducer, { toggleItem } from '../slices/selectedItemsSlice';
-export interface SelectedItem {
-  uid: string;
-  name: string;
-  description?: string;
-}
+import { Provider } from 'react-redux';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import SearchResults from './searchResults';
+import { useTheme } from '../hooks/useTheme';
+import { store } from '../store';
+import { Animal } from '../types';
 
-interface RootState {
-  selectedItems: {
-    items: SelectedItem[];
-  };
-}
+vi.mock('../hooks/useTheme', () => ({
+  useTheme: vi.fn(),
+}));
 
-const mockItem: SelectedItem = { uid: '1', name: 'Test Item' };
+const mockUseTheme = useTheme as unknown as ReturnType<typeof vi.fn>;
 
-vi.mock('react-redux', async () => {
-  const actual =
-    await vi.importActual<typeof import('react-redux')>('react-redux');
-  return {
-    ...actual,
-    useDispatch: vi.fn(),
-    useSelector: (selector: (state: RootState) => unknown) =>
-      selector({ selectedItems: { items: [mockItem] } } as RootState),
-  };
-});
-
-describe('Checkbox Component', () => {
-  const store = configureStore({
-    reducer: {
-      selectedItems: selectedItemsReducer,
-    },
-    preloadedState: {
-      selectedItems: {
-        items: [mockItem],
-      },
-    },
+describe('SearchResults Component', () => {
+  beforeEach(() => {
+    mockUseTheme.mockClear();
   });
 
-  it('renders the checkbox correctly', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Checkbox item={mockItem} />
-        </BrowserRouter>
-      </Provider>,
-    );
-
-    expect(screen.getByRole('checkbox')).toBeInTheDocument();
-  });
-
-  it('checks the checkbox if the item is selected', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Checkbox item={mockItem} />
-        </BrowserRouter>
-      </Provider>,
-    );
-
-    expect(screen.getByRole('checkbox')).toBeChecked();
-  });
-
-  it('dispatches toggleItem action on checkbox change', () => {
-    const dispatch = vi.fn();
-
-    (useDispatch as unknown as Mock).mockReturnValue(dispatch);
+  it('should render a message when there are no results', () => {
+    mockUseTheme.mockReturnValue(false); // Light theme
 
     render(
       <Provider store={store}>
         <BrowserRouter>
-          <Checkbox item={mockItem} />
+          <SearchResults results={[]} />
         </BrowserRouter>
       </Provider>,
     );
 
-    fireEvent.click(screen.getByRole('checkbox'));
+    expect(
+      screen.getByText('No animal found. Try again😸'),
+    ).toBeInTheDocument();
+  });
 
-    expect(dispatch).toHaveBeenCalledWith(toggleItem(mockItem));
+  it('should render links with correct href attribute', () => {
+    const mockResults: Animal[] = [
+      { uid: '1', name: 'Lion', descriptions: ['Big cat'] },
+    ];
+
+    mockUseTheme.mockReturnValue(false); // Light theme
+
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <SearchResults results={mockResults} />
+        </BrowserRouter>
+      </Provider>,
+    );
+
+    expect(screen.getByText('Lion').closest('a')).toHaveAttribute(
+      'href',
+      '/details/1',
+    );
   });
 });
