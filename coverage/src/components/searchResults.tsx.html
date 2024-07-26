@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">51.72% </span>
+                <span class="strong">24.13% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/29</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>7/29</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">51.72% </span>
+                <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">24.13% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/29</span>
+                <span class='fraction'>7/29</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,13 +115,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -130,17 +137,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
@@ -154,12 +154,12 @@ interface SearchResultsProps {
   results: Animal[];
 }
 &nbsp;
-const SearchResults: React.FC&lt;SearchResultsProps&gt; = ({ results }) =&gt; {
-  const darkTheme = useTheme();
-  return (
-    &lt;div className="search-results"&gt;
-      &lt;h2&gt;Search Results&lt;/h2&gt;
-      {results.length &gt; <span class="branch-0 cbranch-no" title="branch not covered" >0 ? (</span>
+const SearchResults: React.FC&lt;SearchResultsProps&gt; = <span class="fstat-no" title="function not covered" >({ results }) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  const darkTheme = useTheme();</span>
+<span class="cstat-no" title="statement not covered" >  return (</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div className="search-results"&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;h2&gt;Search Results&lt;/h2&gt;</span>
+<span class="cstat-no" title="statement not covered" >      {results.length &gt; 0 ? (</span>
 <span class="cstat-no" title="statement not covered" >        &lt;ul&gt;</span>
 <span class="cstat-no" title="statement not covered" >          {results.map((result) =&gt; (</span>
 <span class="cstat-no" title="statement not covered" >            &lt;li key={result.uid}&gt;</span>
@@ -176,11 +176,11 @@ const SearchResults: React.FC&lt;SearchResultsProps&gt; = ({ results }) =&gt; {
 <span class="cstat-no" title="statement not covered" >          ))}</span>
 <span class="cstat-no" title="statement not covered" >        &lt;/ul&gt;</span>
       ) : (
-        &lt;div&gt;No animal found. Try again😸&lt;/div&gt;
+<span class="cstat-no" title="statement not covered" >        &lt;div&gt;No animal found. Try again😸&lt;/div&gt;</span>
       )}
-    &lt;/div&gt;
+<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
   );
-};
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
 export default SearchResults;
 &nbsp;</pre></td></tr></table></pre>
@@ -190,7 +190,7 @@ export default SearchResults;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-25T18:38:43.065Z
+                at 2024-07-26T16:01:05.263Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

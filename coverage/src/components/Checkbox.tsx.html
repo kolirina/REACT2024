@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">23.8% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/21</span>
+                <span class='fraction'>21/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">23.8% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/21</span>
+                <span class='fraction'>21/21</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -107,26 +107,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
@@ -139,27 +139,27 @@ interface CheckboxProps {
   item: SelectedItem;
 }
 &nbsp;
-const Checkbox: React.FC&lt;CheckboxProps&gt; = <span class="fstat-no" title="function not covered" >({ item }) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const dispatch = useDispatch();</span>
-<span class="cstat-no" title="statement not covered" >  const selectedItems = useSelector(</span>
-<span class="cstat-no" title="statement not covered" >    (state: RootState) =&gt; state.selectedItems.items,</span>
-<span class="cstat-no" title="statement not covered" >  );</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  const isChecked = selectedItems.some((i: SelectedItem) =&gt; i.uid === item.uid);</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  const handleChange = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    dispatch(toggleItem(item));</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;input</span>
-<span class="cstat-no" title="statement not covered" >      className="light-checkbox"</span>
-<span class="cstat-no" title="statement not covered" >      type="checkbox"</span>
-<span class="cstat-no" title="statement not covered" >      checked={isChecked}</span>
-<span class="cstat-no" title="statement not covered" >      onChange={handleChange}</span>
-<span class="cstat-no" title="statement not covered" >    /&gt;</span>
+const Checkbox: React.FC&lt;CheckboxProps&gt; = ({ item }) =&gt; {
+  const dispatch = useDispatch();
+  const selectedItems = useSelector(
+    (state: RootState) =&gt; state.selectedItems.items,
   );
-<span class="cstat-no" title="statement not covered" >};</span>
+&nbsp;
+  const isChecked = selectedItems.some((i: SelectedItem) =&gt; i.uid === item.uid);
+&nbsp;
+  const handleChange = () =&gt; {
+    dispatch(toggleItem(item));
+  };
+&nbsp;
+  return (
+    &lt;input
+      className="light-checkbox"
+      type="checkbox"
+      checked={isChecked}
+      onChange={handleChange}
+    /&gt;
+  );
+};
 &nbsp;
 export default Checkbox;
 &nbsp;</pre></td></tr></table></pre>
@@ -169,7 +169,7 @@ export default Checkbox;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-25T18:38:43.065Z
+                at 2024-07-26T16:01:05.263Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

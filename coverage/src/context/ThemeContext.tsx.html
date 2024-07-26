@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -99,20 +99,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { createContext, ReactNode, useState } from 'react';
@@ -124,21 +124,21 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 &nbsp;
-const ThemeProvider = <span class="fstat-no" title="function not covered" >({ children }: ThemeProviderProps) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const [darkTheme, setDarkTheme] = useState(false);</span>
+const ThemeProvider = ({ children }: ThemeProviderProps) =&gt; {
+  const [darkTheme, setDarkTheme] = useState(false);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  const toggleTheme = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setDarkTheme((prevDarkTheme) =&gt; !prevDarkTheme);</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
+  const toggleTheme = () =&gt; {
+    setDarkTheme((prevDarkTheme) =&gt; !prevDarkTheme);
+  };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;ThemeContext.Provider value={darkTheme}&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;ThemeContextUpdate.Provider value={toggleTheme}&gt;</span>
-<span class="cstat-no" title="statement not covered" >        {children}</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/ThemeContextUpdate.Provider&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/ThemeContext.Provider&gt;</span>
+  return (
+    &lt;ThemeContext.Provider value={darkTheme}&gt;
+      &lt;ThemeContextUpdate.Provider value={toggleTheme}&gt;
+        {children}
+      &lt;/ThemeContextUpdate.Provider&gt;
+    &lt;/ThemeContext.Provider&gt;
   );
-<span class="cstat-no" title="statement not covered" >};</span>
+};
 &nbsp;
 export { ThemeProvider, ThemeContext, ThemeContextUpdate };
 &nbsp;</pre></td></tr></table></pre>
@@ -148,7 +148,7 @@ export { ThemeProvider, ThemeContext, ThemeContextUpdate };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-25T18:38:43.065Z
+                at 2024-07-26T16:01:05.263Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

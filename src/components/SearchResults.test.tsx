@@ -1,71 +1,87 @@
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { vi } from 'vitest';
-import SearchResults from './searchResults';
+import { Provider, useDispatch } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { vi, describe, it, expect, Mock } from 'vitest';
+import Checkbox from './Checkbox';
+import selectedItemsReducer, { toggleItem } from '../slices/selectedItemsSlice';
+export interface SelectedItem {
+  uid: string;
+  name: string;
+  description?: string;
+}
 
-// const mockResults = [
-//   { uid: '1', name: 'Animal 1', descriptions: ['Earth Animal 🐾'] },
-//   { uid: '2', name: 'Animal 2', descriptions: ['Avian 🦜'] },
-// ];
-//test
+interface RootState {
+  selectedItems: {
+    items: SelectedItem[];
+  };
+}
 
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
+const mockItem: SelectedItem = { uid: '1', name: 'Test Item' };
+
+vi.mock('react-redux', async () => {
+  const actual =
+    await vi.importActual<typeof import('react-redux')>('react-redux');
   return {
     ...actual,
-    useLocation: vi.fn().mockReturnValue({
-      search: '?search=test',
-      pathname: '/',
-    }),
+    useDispatch: vi.fn(),
+    useSelector: (selector: (state: RootState) => unknown) =>
+      selector({ selectedItems: { items: [mockItem] } } as RootState),
   };
 });
 
-describe('SearchResults Component', () => {
-  // it('renders the list of search results', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <SearchResults results={mockResults} />
-  //     </BrowserRouter>,
-  //   );
+describe('Checkbox Component', () => {
+  const store = configureStore({
+    reducer: {
+      selectedItems: selectedItemsReducer,
+    },
+    preloadedState: {
+      selectedItems: {
+        items: [mockItem],
+      },
+    },
+  });
 
-  //   const resultItems = screen.getAllByRole('listitem');
-  //   expect(resultItems).toHaveLength(mockResults.length);
-  // });
-
-  // it('creates the correct links for each result', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <SearchResults results={mockResults} />
-  //     </BrowserRouter>,
-  //   );
-
-  //   mockResults.forEach((result) => {
-  //     const linkElement = screen.getByText(result.name).closest('a');
-  //     expect(linkElement).toHaveAttribute('href', `/details/${result.uid}`);
-  //   });
-  // });
-
-  // it('displays the correct names for each result', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <SearchResults results={mockResults} />
-  //     </BrowserRouter>,
-  //   );
-
-  //   mockResults.forEach((result) => {
-  //     const nameElement = screen.getByText(result.name);
-  //     expect(nameElement).toBeVisible();
-  //   });
-  // });
-
-  it('displays a message if there are no search results', () => {
+  it('renders the checkbox correctly', () => {
     render(
-      <BrowserRouter>
-        <SearchResults results={[]} />
-      </BrowserRouter>,
+      <Provider store={store}>
+        <BrowserRouter>
+          <Checkbox item={mockItem} />
+        </BrowserRouter>
+      </Provider>,
     );
 
-    const noResultsMessage = screen.getByText(/No/i);
-    expect(noResultsMessage).toBeVisible();
+    expect(screen.getByRole('checkbox')).toBeInTheDocument();
+  });
+
+  it('checks the checkbox if the item is selected', () => {
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Checkbox item={mockItem} />
+        </BrowserRouter>
+      </Provider>,
+    );
+
+    expect(screen.getByRole('checkbox')).toBeChecked();
+  });
+
+  it('dispatches toggleItem action on checkbox change', () => {
+    const dispatch = vi.fn();
+
+    (useDispatch as unknown as Mock).mockReturnValue(dispatch);
+
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Checkbox item={mockItem} />
+        </BrowserRouter>
+      </Provider>,
+    );
+
+    fireEvent.click(screen.getByRole('checkbox'));
+
+    expect(dispatch).toHaveBeenCalledWith(toggleItem(mockItem));
   });
 });
