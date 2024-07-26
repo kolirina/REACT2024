@@ -25,7 +25,6 @@ html {
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
-  /* justify-content: space-between; */
   align-items: center;
 }
 
@@ -86,8 +85,15 @@ button:hover {
   width: fit-content;
   margin-top: 70px;
   padding: 50px;
-  background-color: rgba(212, 224, 219, 0.329);
   border-radius: 15px;
+}
+
+.light-App {
+  background-color: rgba(212, 224, 219, 0.329);
+}
+
+.dark-App {
+  background-color: rgba(10, 10, 17, 0.212);
 }
 
 .top-section {
