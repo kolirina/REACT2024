@@ -51,7 +51,7 @@ describe('SearchResults Component', () => {
 
     expect(screen.getByText('Lion').closest('a')).toHaveAttribute(
       'href',
-      '/details/1',
+      '/details/1?search=&page=1',
     );
   });
 });
