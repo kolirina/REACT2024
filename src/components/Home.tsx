@@ -28,7 +28,7 @@ const Home = () => {
   );
   const isLoading = useSelector((state: RootState) => state.loading.isLoading);
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentSearchTerm = searchParams.get('search') || '';
+  const currentSearchTerm = localStorage.getItem('searchTerm') || '';
   const pageParam = searchParams.get('page') || '1';
 
   React.useEffect(() => {
