@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { useTheme } from '../hooks/useTheme';
 
 interface PaginationProps {
   currentPage: number;
@@ -9,13 +10,14 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
+  const darkTheme = useTheme();
 
   return (
     <div className="pagination">
       {currentPage > 1 && (
         <Link
           to={`?search=${searchTerm}&page=${currentPage - 1}`}
-          className="pagination-link"
+          className={darkTheme ? 'dark-link' : 'light-link'}
         >
           Previous
         </Link>
@@ -26,7 +28,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
       {currentPage < totalPages && (
         <Link
           to={`?search=${searchTerm}&page=${currentPage + 1}`}
-          className="pagination-link"
+          className={darkTheme ? 'dark-link' : 'light-link'}
         >
           Next
         </Link>

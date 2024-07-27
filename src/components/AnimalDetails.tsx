@@ -5,12 +5,14 @@ import { useGetAnimalDetailsQuery } from '../services/apiSlice';
 import { Link } from 'react-router-dom';
 import { RootState } from '../store';
 import '../App.css';
+import { useTheme } from '../hooks/useTheme';
 
 const AnimalDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { data, error } = useGetAnimalDetailsQuery(id!);
   const [descriptions, setDescriptions] = useState<string[]>([]);
   const isLoading = useSelector((state: RootState) => state.loading.isLoading);
+  const darkTheme = useTheme();
 
   useEffect(() => {
     if (data) {
@@ -38,7 +40,9 @@ const AnimalDetails: React.FC = () => {
         <div>
           <h2>{data.animal.name}</h2>
           <p>{descriptions.join(', ')}</p>
-          <Link to="/">Hide Details</Link>
+          <Link to="/" className={darkTheme ? 'dark-link' : 'light-link'}>
+            Hide Details
+          </Link>
         </div>
       ) : (
         <p>No details available</p>

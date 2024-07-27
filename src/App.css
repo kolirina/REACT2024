@@ -177,13 +177,26 @@ ul {
 .dark-animalLink {
   text-decoration: none;
   color: rgba(217, 228, 235, 0.829);
-  font-weight: 100;
+  font-weight: 200 !important;
 }
 
 .light-animalLink {
   text-decoration: none;
   color: rgba(10, 33, 68, 0.87);
-  font-weight: 100;
+}
+
+.dark-link {
+  color: rgba(217, 228, 235, 0.829);
+}
+
+.dark-link:hover,
+.dark-animalLink:hover {
+  color: rgba(135, 142, 202, 0.829);
+}
+
+.light-link:hover,
+.light-animalLink:hover {
+  color: rgb(172, 93, 165);
 }
 
 .light-checkbox {
