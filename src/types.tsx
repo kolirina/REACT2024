@@ -26,3 +26,17 @@ export interface Descriptions {
 export interface AnimalDetails {
   animal: Animal;
 }
+
+export interface SearchAnimalsResponse {
+  animals: Animal[];
+  page: {
+    pageNumber: number;
+    totalPages: number;
+  };
+}
+
+export interface SearchAnimalsRequest {
+  searchTerm: string;
+  pageNumber: number;
+  pageSize: number;
+}
