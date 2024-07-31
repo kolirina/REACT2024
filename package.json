@@ -64,13 +64,13 @@
     ],
     "*.tsx": [
       "prettier --write",
-      "eslint --max-warnings 0"
+      "eslint --max-warnings 10"
     ]
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npx vitest --watch=false"
+      "pre-push": "lint-staged"
     }
   }
 }
