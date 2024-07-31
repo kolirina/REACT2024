@@ -20,8 +20,6 @@ const Flyout: React.FC = () => {
     downloadCSV(selectedItems);
   };
 
-  if (selectedItems.length === 0) return null;
-
   return (
     <div className={darkTheme ? 'dark-flyout' : 'light-flyout'}>
       <span>{selectedItems.length} animals are selected</span>
