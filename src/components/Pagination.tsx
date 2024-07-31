@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';

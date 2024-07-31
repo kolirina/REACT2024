@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useTheme, useThemeUpdate } from '../hooks/useTheme';
 import { useSelector, useDispatch } from 'react-redux';

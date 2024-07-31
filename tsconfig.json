@@ -8,14 +8,20 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "incremental": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    // "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "types": ["vite/client", "@testing-library/jest-dom", "vitest/globals"]
+    // "jsx": "react-jsx",
+    "jsx": "preserve",
+    "types": ["vite/client", "@testing-library/jest-dom", "vitest/globals"],
+    "plugins": [{ "name": "next" }]
   },
-  "include": ["src"]
+  // "include": ["src"]
+  "include": ["./src", "./dist/types/**/*.ts", "./next-env.d.ts"],
+  "exclude": ["./node_modules"]
 }

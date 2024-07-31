@@ -1,3 +1,5 @@
+'use client';
+
 import { useContext } from 'react';
 import { ThemeContext, ThemeContextUpdate } from '../context/ThemeContext';
 
