@@ -1,21 +1,27 @@
 import React, { createContext, ReactNode, useState, useEffect } from 'react';
 
-const ThemeContext = createContext<boolean>(false);
-const ThemeContextUpdate = createContext<() => void>(() => {});
+// Создайте контекст для значения темы
+const ThemeContext = createContext<boolean | undefined>(undefined);
+// Создайте контекст для функции переключения темы
+const ThemeContextUpdate = createContext<(() => void) | undefined>(undefined);
 
 interface ThemeProviderProps {
   children: ReactNode;
 }
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  // Initialize theme from localStorage or default to false (light theme)
-  const [darkTheme, setDarkTheme] = useState<boolean>(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme ? JSON.parse(savedTheme) : false;
-  });
+  const [darkTheme, setDarkTheme] = useState<boolean>(false);
 
   useEffect(() => {
-    // Save theme to localStorage whenever it changes
+    // Этот код выполняется только на клиенте
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setDarkTheme(JSON.parse(savedTheme));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Сохраняйте тему в localStorage при изменении
     localStorage.setItem('theme', JSON.stringify(darkTheme));
   }, [darkTheme]);
 
@@ -34,7 +40,7 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
 export { ThemeProvider, ThemeContext, ThemeContextUpdate };
 
-// import React, { createContext, ReactNode, useState } from 'react';
+// import React, { createContext, ReactNode, useState, useEffect } from 'react';
 
 // const ThemeContext = createContext<boolean>(false);
 // const ThemeContextUpdate = createContext<() => void>(() => {});
@@ -44,7 +50,16 @@ export { ThemeProvider, ThemeContext, ThemeContextUpdate };
 // }
 
 // const ThemeProvider = ({ children }: ThemeProviderProps) => {
-//   const [darkTheme, setDarkTheme] = useState(false);
+//   // Initialize theme from localStorage or default to false (light theme)
+//   const [darkTheme, setDarkTheme] = useState<boolean>(() => {
+//     const savedTheme = localStorage.getItem('theme');
+//     return savedTheme ? JSON.parse(savedTheme) : false;
+//   });
+
+//   useEffect(() => {
+//     // Save theme to localStorage whenever it changes
+//     localStorage.setItem('theme', JSON.stringify(darkTheme));
+//   }, [darkTheme]);
 
 //   const toggleTheme = () => {
 //     setDarkTheme((prevDarkTheme) => !prevDarkTheme);

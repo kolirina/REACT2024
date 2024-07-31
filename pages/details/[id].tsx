@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useGetAnimalDetailsQuery } from '../services/apiSlice';
+import { useGetAnimalDetailsQuery } from '../../src/services/apiSlice';
 import Link from 'next/link';
-import { RootState } from '../store';
-import '../App.css';
-import { useTheme } from '../hooks/useTheme';
+import { RootState } from '../../src/store';
+import { useTheme } from '../../src/hooks/useTheme';
 import { useRouter } from 'next/router';
 
 const AnimalDetails: React.FC = () => {
   const router = useRouter();
   const { id, search } = router.query;
-
   const { data, error } = useGetAnimalDetailsQuery(id as string);
   const [descriptions, setDescriptions] = useState<string[]>([]);
   const isLoading = useSelector((state: RootState) => state.loading.isLoading);

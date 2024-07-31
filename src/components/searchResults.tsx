@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import Checkbox from './Checkbox';
 import { Animal } from '../types';
 import { useTheme } from '../hooks/useTheme';
-import '../App.css';
-import { useSearchParams } from 'react-router-dom';
+// import '../App.css';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 
@@ -13,8 +13,9 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
-  const [searchParams] = useSearchParams();
-  const searchTerm = searchParams.get('search') || '';
+  const router = useRouter();
+  const { search } = router.query;
+  const searchTerm = search || '';
   const darkTheme = useTheme();
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage,
@@ -29,7 +30,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Checkbox item={result} />
                 <Link
-                  to={`/details/${result.uid}?search=${searchTerm}&page=${currentPage}`}
+                  href={`/details/${result.uid}?search=${searchTerm}&page=${currentPage}`}
                   className={darkTheme ? 'dark-animalLink' : 'light-animalLink'}
                 >
                   <strong>{result.name}</strong>
