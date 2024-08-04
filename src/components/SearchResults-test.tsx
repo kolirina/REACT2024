@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 // import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import SearchResults from './searchResults';
+import SearchResults from './SearchResults';
 import { useTheme } from '../hooks/useTheme';
 import { store } from '../store';
 import { Animal } from '../types';

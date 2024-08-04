@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for REACT2024/src/components/searchResults.tsx</title>
+    <title>Code coverage report for REACT2024/src/components/SearchResults.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">REACT2024/src/components</a> searchResults.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">REACT2024/src/components</a> SearchResults.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/36</span>
+                <span class='fraction'>0/38</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/36</span>
+                <span class='fraction'>0/38</span>
             </div>
         
             
@@ -112,19 +112,23 @@
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -162,27 +166,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import React from 'react';</span></span></span>
-<span class="cstat-no" title="statement not covered" >import Link from 'next/link';</span>
 <span class="cstat-no" title="statement not covered" >import Checkbox from './Checkbox';</span>
 import { Animal } from '../types';
 <span class="cstat-no" title="statement not covered" >import { useTheme } from '../hooks/useTheme';</span>
-// import '../App.css';
-<span class="cstat-no" title="statement not covered" >import { useRouter } from 'next/router';</span>
-<span class="cstat-no" title="statement not covered" >import { useSelector } from 'react-redux';</span>
-import { RootState } from '../store';
 &nbsp;
 interface SearchResultsProps {
   results: Animal[];
+  onAnimalDetailSelect: (animal: Animal) =&gt; void;
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >const SearchResults: React.FC&lt;SearchResultsProps&gt; = ({ results }) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const router = useRouter();</span>
-<span class="cstat-no" title="statement not covered" >  const { search } = router.query;</span>
-<span class="cstat-no" title="statement not covered" >  const searchTerm = search || '';</span>
+<span class="cstat-no" title="statement not covered" >const SearchResults: React.FC&lt;SearchResultsProps&gt; = ({</span>
+<span class="cstat-no" title="statement not covered" >  results,</span>
+<span class="cstat-no" title="statement not covered" >  onAnimalDetailSelect,</span>
+<span class="cstat-no" title="statement not covered" >}) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  const darkTheme = useTheme();</span>
-<span class="cstat-no" title="statement not covered" >  const currentPage = useSelector(</span>
-<span class="cstat-no" title="statement not covered" >    (state: RootState) =&gt; state.pagination.currentPage,</span>
-<span class="cstat-no" title="statement not covered" >  );</span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
 <span class="cstat-no" title="statement not covered" >    &lt;div className="search-results"&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;h2&gt;Search Results&lt;/h2&gt;</span>
@@ -191,13 +189,21 @@ interface SearchResultsProps {
 <span class="cstat-no" title="statement not covered" >          {results.map((result) =&gt; (</span>
 <span class="cstat-no" title="statement not covered" >            &lt;li key={result.uid}&gt;</span>
 <span class="cstat-no" title="statement not covered" >              &lt;div style={{ display: 'flex', alignItems: 'center' }}&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;Checkbox item={result} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;Link</span>
-<span class="cstat-no" title="statement not covered" >                  href={`/details/${result.uid}?search=${searchTerm}&amp;page=${currentPage}`}</span>
+<span class="cstat-no" title="statement not covered" >                &lt;Checkbox item={result} /&gt;{' '}</span>
+<span class="cstat-no" title="statement not covered" >                &lt;button</span>
+<span class="cstat-no" title="statement not covered" >                  onClick={() =&gt; onAnimalDetailSelect(result)}</span>
 <span class="cstat-no" title="statement not covered" >                  className={darkTheme ? 'dark-animalLink' : 'light-animalLink'}</span>
+<span class="cstat-no" title="statement not covered" >                  style={{</span>
+<span class="cstat-no" title="statement not covered" >                    background: 'none',</span>
+<span class="cstat-no" title="statement not covered" >                    border: 'none',</span>
+<span class="cstat-no" title="statement not covered" >                    padding: 0,</span>
+<span class="cstat-no" title="statement not covered" >                    cursor: 'pointer',</span>
+<span class="cstat-no" title="statement not covered" >                    color: 'inherit',</span>
+<span class="cstat-no" title="statement not covered" >                    textDecoration: 'underline',</span>
+<span class="cstat-no" title="statement not covered" >                  }}</span>
                 &gt;
 <span class="cstat-no" title="statement not covered" >                  &lt;strong&gt;{result.name}&lt;/strong&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;/Link&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;/li&gt;</span>
 <span class="cstat-no" title="statement not covered" >          ))}</span>
@@ -217,7 +223,7 @@ interface SearchResultsProps {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-31T19:38:20.688Z
+                at 2024-08-04T19:42:53.080Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
