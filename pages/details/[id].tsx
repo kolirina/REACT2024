@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useTheme, useThemeUpdate } from '../src/hooks/useTheme';
+import { useTheme, useThemeUpdate } from '../../src/hooks/useTheme';
 import { useSelector, useDispatch } from 'react-redux';
-import { useSearchAnimalsQuery } from '../src/services/apiSlice';
-import { RootState } from '../src/store';
-import { setPage, setTotalPages } from '../src/slices/paginationSlice';
-import Search from '../src/components/Search';
-import SearchResults from '../src/components/SearchResults';
-import Pagination from '../src/components/Pagination';
-import Flyout from '../src/components/Flyout';
-import { Animal } from '../src/types';
+import {
+  useSearchAnimalsQuery,
+  useGetAnimalDetailsQuery,
+} from '../../src/services/apiSlice';
+import { RootState } from '../../src/store';
+import { setPage, setTotalPages } from '../../src/slices/paginationSlice';
+import Search from '../../src/components/Search';
+import SearchResults from '../../src/components/SearchResults';
+import Pagination from '../../src/components/Pagination';
+import Flyout from '../../src/components/Flyout';
+import AnimalDetails from '../../src/components/AnimalDetails';
+import { Animal } from '../../src/types';
 
-const Home = () => {
+const AnimalDetailsPage = () => {
   const darkTheme = useTheme();
   const toggleTheme = useThemeUpdate();
   const dispatch = useDispatch();
   const router = useRouter();
 
   const [currentSearchTerm, setCurrentSearchTerm] = useState<string>('');
+  const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
   const selectedAnimals = useSelector(
     (state: RootState) => state.selectedItems.items,
   );
 
-  const { page } = router.query;
+  const { page, id } = router.query;
   const currentPage = parseInt(page as string, 10) || 1;
 
   const { data: searchData, isLoading: searchLoading } = useSearchAnimalsQuery({
@@ -30,6 +35,11 @@ const Home = () => {
     pageNumber: currentPage - 1,
     pageSize: 15,
   });
+
+  const { data: animalDetailsData, isLoading: animalDetailsLoading } =
+    useGetAnimalDetailsQuery(id as string, {
+      skip: !id,
+    });
 
   useEffect(() => {
     const savedSearchTerm = localStorage.getItem('searchTerm') || '';
@@ -61,6 +71,14 @@ const Home = () => {
     }
   }, [searchData, dispatch]);
 
+  useEffect(() => {
+    if (animalDetailsData) {
+      setSelectedAnimal(animalDetailsData.animal);
+    } else {
+      setSelectedAnimal(null);
+    }
+  }, [animalDetailsData]);
+
   const handleSearch = (term: string) => {
     localStorage.setItem('searchTerm', term);
     router.push(`/?search=${term}&page=1`, undefined, { shallow: true });
@@ -72,6 +90,18 @@ const Home = () => {
       undefined,
       { shallow: true },
     );
+  };
+
+  const handleHideDetails = () => {
+    router.push(
+      {
+        pathname: '/',
+        query: { search: currentSearchTerm, page: currentPage },
+      },
+      undefined,
+      { shallow: true },
+    );
+    setSelectedAnimal(null);
   };
 
   return (
@@ -108,6 +138,21 @@ const Home = () => {
               </>
             )}
           </div>
+          <div className="right-section" style={{ flex: 1 }}>
+            {animalDetailsLoading ? (
+              <div className="loader-container">
+                <div className="loader">Loading details...</div>
+              </div>
+            ) : (
+              id &&
+              selectedAnimal && (
+                <AnimalDetails
+                  animal={selectedAnimal}
+                  onHideDetails={handleHideDetails}
+                />
+              )
+            )}
+          </div>
         </div>
         {selectedAnimals.length > 0 && <Flyout />}
       </div>
@@ -115,4 +160,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default AnimalDetailsPage;

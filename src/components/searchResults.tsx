@@ -32,7 +32,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                     padding: 0,
                     cursor: 'pointer',
                     color: 'inherit',
-                    textDecoration: 'underline',
+                    textDecoration: 'none',
                   }}
                 >
                   <strong>{result.name}</strong>
