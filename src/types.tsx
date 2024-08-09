@@ -40,3 +40,10 @@ export interface SearchAnimalsRequest {
   pageNumber: number;
   pageSize: number;
 }
+
+export interface HomePageProps {
+  initialSearchTerm: string;
+  initialPage: number;
+  initialAnimals: Animal[];
+  totalPages: number;
+}

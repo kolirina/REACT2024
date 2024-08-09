@@ -1,68 +1,76 @@
 import React, { useEffect, useState } from 'react';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useTheme, useThemeUpdate } from '../src/hooks/useTheme';
 import { useSelector, useDispatch } from 'react-redux';
-import { useSearchAnimalsQuery } from '../src/services/apiSlice';
+import { useTheme, useThemeUpdate } from '../src/hooks/useTheme';
 import { RootState } from '../src/store';
-import { setPage, setTotalPages } from '../src/slices/paginationSlice';
 import Search from '../src/components/Search';
 import SearchResults from '../src/components/SearchResults';
 import Pagination from '../src/components/Pagination';
 import Flyout from '../src/components/Flyout';
-import { Animal } from '../src/types';
+import { Animal, HomePageProps } from '../src/types';
+import { getServerSideProps } from '../src/server/getServerSideProps';
+import { fetchAnimalData } from '../src/services/fetchAnimalData';
 
-const Home = () => {
+const Home: NextPage<HomePageProps> = ({
+  initialSearchTerm,
+  initialPage,
+  initialAnimals,
+  totalPages,
+}) => {
+  const [currentSearchTerm, setCurrentSearchTerm] =
+    useState<string>(initialSearchTerm);
+  const [animals, setAnimals] = useState<Animal[]>(initialAnimals);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [paginationTotalPages, setPaginationTotalPages] =
+    useState<number>(totalPages);
+
   const darkTheme = useTheme();
   const toggleTheme = useThemeUpdate();
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [currentSearchTerm, setCurrentSearchTerm] = useState<string>('');
   const selectedAnimals = useSelector(
     (state: RootState) => state.selectedItems.items,
   );
 
   const { page } = router.query;
-  const currentPage = parseInt(page as string, 10) || 1;
-
-  const { data: searchData, isLoading: searchLoading } = useSearchAnimalsQuery({
-    searchTerm: currentSearchTerm,
-    pageNumber: currentPage - 1,
-    pageSize: 15,
-  });
+  const currentPage = parseInt(page as string, 10) || initialPage;
 
   useEffect(() => {
-    const savedSearchTerm = localStorage.getItem('searchTerm') || '';
-    setCurrentSearchTerm(savedSearchTerm);
-
-    if (!router.query.search && savedSearchTerm) {
-      router.replace(
-        {
-          pathname: router.pathname,
-          query: { ...router.query, search: savedSearchTerm, page: '1' },
-        },
-        undefined,
-        { shallow: true },
-      );
+    if (typeof window !== 'undefined') {
+      const savedSearchTerm =
+        localStorage.getItem('searchTerm') || initialSearchTerm || '';
+      setCurrentSearchTerm(savedSearchTerm);
     }
-  }, [router]);
+  }, [initialSearchTerm]);
 
   useEffect(() => {
-    const searchTerm = (router.query.search as string) || '';
-    setCurrentSearchTerm(searchTerm);
+    const fetchAnimals = async () => {
+      setLoading(true);
+      try {
+        const { initialAnimals, totalPages } = await fetchAnimalData(
+          currentSearchTerm,
+          currentPage,
+        );
+        setAnimals(initialAnimals);
+        setPaginationTotalPages(totalPages);
+      } catch (error) {
+        console.error('Failed to fetch animals:', error);
+        setAnimals([]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const pageNumber = parseInt(router.query.page as string, 10) || 1;
-    dispatch(setPage(pageNumber));
-  }, [router.query.search, router.query.page, dispatch]);
-
-  useEffect(() => {
-    if (searchData) {
-      dispatch(setTotalPages(searchData.page.totalPages));
-    }
-  }, [searchData, dispatch]);
+    fetchAnimals();
+  }, [currentSearchTerm, currentPage, dispatch]);
 
   const handleSearch = (term: string) => {
-    localStorage.setItem('searchTerm', term);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('searchTerm', term);
+    }
+    setCurrentSearchTerm(term);
     router.push(`/?search=${term}&page=1`, undefined, { shallow: true });
   };
 
@@ -85,15 +93,15 @@ const Home = () => {
         </div>
         <div className="content-section" style={{ display: 'flex' }}>
           <div className="left-section" style={{ flex: 2 }}>
-            {searchLoading ? (
+            {loading ? (
               <div className="loader-container">
                 <div className="loader">Loading...</div>
               </div>
             ) : (
               <>
-                {searchData ? (
+                {animals ? (
                   <SearchResults
-                    results={searchData.animals}
+                    results={animals}
                     onAnimalDetailSelect={handleAnimalDetailSelect}
                   />
                 ) : (
@@ -102,17 +110,24 @@ const Home = () => {
                 <div className="pagination">
                   <Pagination
                     currentPage={currentPage}
-                    totalPages={searchData?.page.totalPages || 0}
+                    totalPages={paginationTotalPages}
                   />
                 </div>
               </>
             )}
           </div>
+          <div className="right-section" style={{ flex: 1 }}>
+            {Array.isArray(selectedAnimals) && selectedAnimals.length > 0 && (
+              <Flyout />
+            )}
+          </div>
         </div>
-        {selectedAnimals.length > 0 && <Flyout />}
       </div>
     </div>
   );
 };
 
 export default Home;
+
+// eslint-disable-next-line react-refresh/only-export-components
+export { getServerSideProps };

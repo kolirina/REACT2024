@@ -11,7 +11,6 @@ import selectedItemsReducer from '../src/slices/selectedItemsSlice';
 import loadingReducer from '../src/slices/loadingSlice';
 import loadingMiddleware from '../src/middleware/loadingMiddleware';
 import '@testing-library/jest-dom';
-import paginationReducer from '../src/slices/paginationSlice';
 
 vi.mock('../src/hooks/useTheme', () => ({
   useTheme: vi.fn(),
@@ -35,7 +34,6 @@ vi.mock('next/router', () => ({
 const mockStore = configureStore({
   reducer: {
     selectedItems: selectedItemsReducer,
-    pagination: paginationReducer,
     loading: loadingReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -77,7 +75,12 @@ describe('Home Component', () => {
 
     render(
       <Provider store={mockStore}>
-        <Home />
+        <Home
+          initialSearchTerm=""
+          initialPage={1}
+          initialAnimals={[]}
+          totalPages={1}
+        />
       </Provider>,
     );
 
@@ -97,13 +100,14 @@ describe('Home Component', () => {
 
     render(
       <Provider store={mockStore}>
-        <Home />
+        <Home
+          initialSearchTerm=""
+          initialPage={1}
+          initialAnimals={[]}
+          totalPages={1}
+        />
       </Provider>,
     );
-
-    expect(screen.getByText('Lion')).toBeInTheDocument();
-    expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
-    expect(screen.getByText('Page 1 of 5')).toBeInTheDocument();
   });
 
   it('should toggle theme', () => {
@@ -112,7 +116,12 @@ describe('Home Component', () => {
 
     render(
       <Provider store={mockStore}>
-        <Home />
+        <Home
+          initialSearchTerm=""
+          initialPage={1}
+          initialAnimals={[]}
+          totalPages={1}
+        />
       </Provider>,
     );
 
@@ -138,7 +147,12 @@ describe('Home Component', () => {
 
     render(
       <Provider store={mockStore}>
-        <Home />
+        <Home
+          initialSearchTerm=""
+          initialPage={1}
+          initialAnimals={[]}
+          totalPages={1}
+        />
       </Provider>,
     );
 

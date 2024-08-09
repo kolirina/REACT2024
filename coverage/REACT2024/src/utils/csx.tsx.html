@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">91.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>21/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/8</span>
+                <span class='fraction'>6/9</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">91.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>21/23</span>
             </div>
         
             
@@ -94,7 +94,8 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -107,21 +108,22 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -131,30 +133,31 @@ export const downloadCSV = (items: Animal[]) =&gt; {
   const headers = ['UID', 'Name', 'Description'];
   const rows = items.map((item) =&gt; {
     const descriptions: string[] = [];
-    if (item.earthAnimal) <span class="branch-0 cbranch-no" title="branch not covered" >descriptions.push('Earth Animal');</span>
+    if (item.earthAnimal) descriptions.push('Earth Animal');
     if (item.earthInsect) <span class="branch-0 cbranch-no" title="branch not covered" >descriptions.push('Earth Insect');</span>
-    if (item.avian) <span class="branch-0 cbranch-no" title="branch not covered" >descriptions.push('Avian');</span>
+    if (item.avian) descriptions.push('Avian');
     if (item.canine) <span class="branch-0 cbranch-no" title="branch not covered" >descriptions.push('Canine');</span>
-    if (item.feline) <span class="branch-0 cbranch-no" title="branch not covered" >descriptions.push('Feline');</span>
+    if (item.feline) descriptions.push('Feline');
 &nbsp;
-    if (descriptions.length === 0) {
-      descriptions.push('an infinitely cute animal');
-    }
+    if (descriptions.length === 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      descriptions.push('an infinitely cute animal');</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 &nbsp;
     return [item.uid, item.name, descriptions.join(', ')];
   });
 &nbsp;
-  const csvContent =
-    'data:text/csv;charset=utf-8,' +
-    [headers, ...rows].map((e) =&gt; e.join(',')).join('\n');
+  const csvContent = [headers, ...rows].map((e) =&gt; e.join(',')).join('\n');
 &nbsp;
-  const encodedUri = encodeURI(csvContent);
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+&nbsp;
+  const url = URL.createObjectURL(blob);
+&nbsp;
   const link = document.createElement('a');
-  link.setAttribute('href', encodedUri);
-  link.setAttribute('download', `${items.length}_animals.csv`);
-  document.body.appendChild(link);
+  link.href = url;
+  link.download = `${items.length}_animals.csv`;
+&nbsp;
   link.click();
-  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -163,7 +166,7 @@ export const downloadCSV = (items: Animal[]) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-05T17:27:31.523Z
+                at 2024-08-09T19:14:15.622Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

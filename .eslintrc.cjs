@@ -29,4 +29,7 @@ module.exports = {
       version: 'detect',
     },
   },
+  globals: {
+    vi: true,
+  },
 };
