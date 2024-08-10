@@ -1,17 +1,20 @@
+'use client';
+
 import { useTheme } from '../hooks/useTheme';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-
+import { useSearchParams } from 'next/navigation';
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
 }
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
-  const router = useRouter();
-  const { search } = router.query;
-  const searchTerm = search || '';
+  const searchParams = useSearchParams();
+  const searchTerm = searchParams.get('search') || '';
   const darkTheme = useTheme();
+  if (!currentPage) {
+    currentPage = 1;
+  }
 
   return (
     <div className="pagination">

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for REACT2024/pages/_app.tsx</title>
+    <title>Code coverage report for REACT2024/lib/themeSlice.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">REACT2024/pages</a> _app.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">REACT2024/lib</a> themeSlice.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
@@ -86,7 +86,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -95,28 +94,29 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React from 'react';<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
-import { AppProps } from 'next/app';
-<span class="cstat-no" title="statement not covered" >import { Provider } from 'react-redux';</span>
-<span class="cstat-no" title="statement not covered" >import { store } from '../src/store';</span>
-<span class="cstat-no" title="statement not covered" >import { ThemeProvider } from '../src/context/ThemeContext';</span>
-<span class="cstat-no" title="statement not covered" >import './global.css';</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { createSlice } from '@reduxjs/toolkit';</span></span></span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >function MyApp({ Component, pageProps }: AppProps) {</span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;Provider store={store}&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;ThemeProvider&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;Component {...pageProps} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/ThemeProvider&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/Provider&gt;</span>
-  );
-<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" >const initialState = {</span>
+<span class="cstat-no" title="statement not covered" >  dark: false,</span>
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default MyApp;</span>
+<span class="cstat-no" title="statement not covered" >const themeSlice = createSlice({</span>
+<span class="cstat-no" title="statement not covered" >  name: 'theme',</span>
+<span class="cstat-no" title="statement not covered" >  initialState,</span>
+<span class="cstat-no" title="statement not covered" >  reducers: {</span>
+<span class="cstat-no" title="statement not covered" >    toggleTheme(state) {</span>
+<span class="cstat-no" title="statement not covered" >      state.dark = !state.dark;</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+<span class="cstat-no" title="statement not covered" >  },</span>
+<span class="cstat-no" title="statement not covered" >});</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >export const { toggleTheme } = themeSlice.actions;</span>
+<span class="cstat-no" title="statement not covered" >export default themeSlice.reducer;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -124,7 +124,7 @@ import { AppProps } from 'next/app';
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-09T19:14:15.622Z
+                at 2024-08-10T19:26:20.244Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

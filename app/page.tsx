@@ -1,6 +1,8 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme, useThemeUpdate } from '../src/hooks/useTheme';
 import { RootState } from '../src/store';
@@ -9,7 +11,6 @@ import SearchResults from '../src/components/SearchResults';
 import Pagination from '../src/components/Pagination';
 import Flyout from '../src/components/Flyout';
 import { Animal, HomePageProps } from '../src/types';
-import { getServerSideProps } from '../src/server/getServerSideProps';
 import { fetchAnimalData } from '../src/services/fetchAnimalData';
 
 const Home: NextPage<HomePageProps> = ({
@@ -34,13 +35,15 @@ const Home: NextPage<HomePageProps> = ({
     (state: RootState) => state.selectedItems.items,
   );
 
-  const { page } = router.query;
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page');
+
   const currentPage = parseInt(page as string, 10) || initialPage;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedSearchTerm =
-        localStorage.getItem('searchTerm') || initialSearchTerm || '';
+        localStorage.getItem('searchTerm') || initialSearchTerm || ' ';
       setCurrentSearchTerm(savedSearchTerm);
     }
   }, [initialSearchTerm]);
@@ -50,7 +53,7 @@ const Home: NextPage<HomePageProps> = ({
       setLoading(true);
       try {
         const { initialAnimals, totalPages } = await fetchAnimalData(
-          currentSearchTerm,
+          localStorage.getItem('searchTerm') || '',
           currentPage,
         );
         setAnimals(initialAnimals);
@@ -71,14 +74,12 @@ const Home: NextPage<HomePageProps> = ({
       localStorage.setItem('searchTerm', term);
     }
     setCurrentSearchTerm(term);
-    router.push(`/?search=${term}&page=1`, undefined, { shallow: true });
+    router.push(`/?search=${term}&page=1`);
   };
 
   const handleAnimalDetailSelect = (animal: Animal) => {
     router.push(
       `/details/${animal.uid}?search=${currentSearchTerm}&page=${currentPage}`,
-      undefined,
-      { shallow: true },
     );
   };
 
@@ -128,6 +129,3 @@ const Home: NextPage<HomePageProps> = ({
 };
 
 export default Home;
-
-// eslint-disable-next-line react-refresh/only-export-components
-export { getServerSideProps };
