@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 interface SearchProps {
   onSearch: (searchTerm: string) => void;
+  defaultValue?: string;
 }
 
-const Search: React.FC<SearchProps> = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const Search: React.FC<SearchProps> = ({ onSearch, defaultValue = '' }) => {
+  const [searchTerm, setSearchTerm] = useState(defaultValue);
 
   useEffect(() => {
-    const savedSearchTerm = localStorage.getItem('searchTerm') || '';
-    setSearchTerm(savedSearchTerm);
-  }, []);
+    setSearchTerm(defaultValue);
+  }, [defaultValue]);
 
   const handleSubmit = () => {
     const trimmedSearchTerm = searchTerm.trim();

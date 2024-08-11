@@ -17,15 +17,16 @@ export const downloadCSV = (items: Animal[]) => {
     return [item.uid, item.name, descriptions.join(', ')];
   });
 
-  const csvContent =
-    'data:text/csv;charset=utf-8,' +
-    [headers, ...rows].map((e) => e.join(',')).join('\n');
+  const csvContent = [headers, ...rows].map((e) => e.join(',')).join('\n');
 
-  const encodedUri = encodeURI(csvContent);
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+  const url = URL.createObjectURL(blob);
+
   const link = document.createElement('a');
-  link.setAttribute('href', encodedUri);
-  link.setAttribute('download', `${items.length}_animals.csv`);
-  document.body.appendChild(link);
+  link.href = url;
+  link.download = `${items.length}_animals.csv`;
+
   link.click();
-  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 };

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/hooks/useTheme.tsx"],
+  "sourcesContent": ["// REMIX HMR BEGIN\nimport * as __hmr__ from \"remix:hmr\";\nif (import.meta) {\nimport.meta.hot = __hmr__.createHotContext(\n//@ts-expect-error\n\"src\\\\hooks\\\\useTheme.tsx\"\n);\nimport.meta.hot.lastModified = \"1722443301855.0935\";\n}\n// REMIX HMR END\n\nimport { useContext } from 'react';\r\nimport { ThemeContext, ThemeContextUpdate } from '../context/ThemeContext';\r\n\r\nexport const useTheme = () => useContext(ThemeContext);\r\nexport const useThemeUpdate = () => useContext(ThemeContextUpdate);\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;AAWA,mBAA2B;AAT3B,IAAI,aAAa;AACjB,cAAY,MAAc;AAAA;AAAA,IAE1B;AAAA,EACA;AACA,cAAY,IAAI,eAAe;AAC/B;AAMO,IAAM,WAAW,UAAM,yBAAW,YAAY;AAC9C,IAAM,iBAAiB,UAAM,yBAAW,kBAAkB;",
+  "names": []
+}

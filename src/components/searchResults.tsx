@@ -29,7 +29,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Checkbox item={result} />
                 <Link
-                  to={`/details/${result.uid}?search=${searchTerm}&page=${currentPage}`}
+                  to={`/animals/${result.uid}?search=${searchTerm}&page=${currentPage}`}
                   className={darkTheme ? 'dark-animalLink' : 'light-animalLink'}
                 >
                   <strong>{result.name}</strong>

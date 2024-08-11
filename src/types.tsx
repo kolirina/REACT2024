@@ -26,3 +26,16 @@ export interface Descriptions {
 export interface AnimalDetails {
   animal: Animal;
 }
+
+export interface Animal {
+  name: string;
+  earthAnimal?: boolean;
+  earthInsect?: boolean;
+  avian?: boolean;
+  canine?: boolean;
+  feline?: boolean;
+}
+
+export interface LoaderData {
+  data: AnimalDetails;
+}

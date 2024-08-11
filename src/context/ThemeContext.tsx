@@ -8,15 +8,21 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  // Initialize theme from localStorage or default to false (light theme)
-  const [darkTheme, setDarkTheme] = useState<boolean>(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme ? JSON.parse(savedTheme) : false;
-  });
+  const [darkTheme, setDarkTheme] = useState<boolean>(false);
 
   useEffect(() => {
-    // Save theme to localStorage whenever it changes
-    localStorage.setItem('theme', JSON.stringify(darkTheme));
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        setDarkTheme(JSON.parse(savedTheme));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', JSON.stringify(darkTheme));
+    }
   }, [darkTheme]);
 
   const toggleTheme = () => {
@@ -33,30 +39,3 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
 };
 
 export { ThemeProvider, ThemeContext, ThemeContextUpdate };
-
-// import React, { createContext, ReactNode, useState } from 'react';
-
-// const ThemeContext = createContext<boolean>(false);
-// const ThemeContextUpdate = createContext<() => void>(() => {});
-
-// interface ThemeProviderProps {
-//   children: ReactNode;
-// }
-
-// const ThemeProvider = ({ children }: ThemeProviderProps) => {
-//   const [darkTheme, setDarkTheme] = useState(false);
-
-//   const toggleTheme = () => {
-//     setDarkTheme((prevDarkTheme) => !prevDarkTheme);
-//   };
-
-//   return (
-//     <ThemeContext.Provider value={darkTheme}>
-//       <ThemeContextUpdate.Provider value={toggleTheme}>
-//         {children}
-//       </ThemeContextUpdate.Provider>
-//     </ThemeContext.Provider>
-//   );
-// };
-
-// export { ThemeProvider, ThemeContext, ThemeContextUpdate };

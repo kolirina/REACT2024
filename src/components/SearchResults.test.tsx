@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import SearchResults from './searchResults';
+import SearchResults from './SearchResults';
 import { useTheme } from '../hooks/useTheme';
 import { store } from '../store';
 import { Animal } from '../types';
@@ -19,7 +19,7 @@ describe('SearchResults Component', () => {
   });
 
   it('should render a message when there are no results', () => {
-    mockUseTheme.mockReturnValue(false); // Light theme
+    mockUseTheme.mockReturnValue(false);
 
     render(
       <Provider store={store}>
@@ -39,7 +39,7 @@ describe('SearchResults Component', () => {
       { uid: '1', name: 'Lion', descriptions: ['Big cat'] },
     ];
 
-    mockUseTheme.mockReturnValue(false); // Light theme
+    mockUseTheme.mockReturnValue(false);
 
     render(
       <Provider store={store}>
@@ -51,7 +51,7 @@ describe('SearchResults Component', () => {
 
     expect(screen.getByText('Lion').closest('a')).toHaveAttribute(
       'href',
-      '/details/1?search=&page=1',
+      '/animals/1?search=&page=1',
     );
   });
 });
