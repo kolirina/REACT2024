@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1723230855673" clover="3.2.0">
-  <project timestamp="1723230855673" name="All files">
-    <metrics statements="792" coveredstatements="643" conditionals="132" coveredconditionals="97" methods="56" coveredmethods="41" elements="980" coveredelements="781" complexity="0" loc="792" ncloc="792" packages="12" files="25" classes="25"/>
+<coverage generated="1723414471912" clover="3.2.0">
+  <project timestamp="1723414471913" name="All files">
+    <metrics statements="791" coveredstatements="643" conditionals="132" coveredconditionals="97" methods="56" coveredmethods="41" elements="979" coveredelements="781" complexity="0" loc="791" ncloc="791" packages="12" files="25" classes="25"/>
     <package name="REACT2024">
-      <metrics statements="7" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="6" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="next.config.mjs" path="C:\Users\admin\Desktop\REACT+TS\new react\REACT2024\next.config.mjs">
-        <metrics statements="7" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="6" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
       </file>
     </package>
     <package name="REACT2024.pages">
@@ -298,12 +297,13 @@
         <line num="160" count="10" type="stmt"/>
         <line num="162" count="10" type="stmt"/>
         <line num="164" count="1" type="stmt"/>
-        <line num="167" count="1" type="stmt"/>
-        <line num="168" count="0" type="stmt"/>
+        <line num="166" count="1" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
         <line num="170" count="0" type="stmt"/>
         <line num="171" count="0" type="stmt"/>
         <line num="172" count="0" type="stmt"/>
-        <line num="173" count="0" type="stmt"/>
+        <line num="174" count="0" type="stmt"/>
         <line num="175" count="0" type="stmt"/>
         <line num="176" count="0" type="stmt"/>
         <line num="177" count="0" type="stmt"/>
@@ -319,7 +319,6 @@
         <line num="187" count="0" type="stmt"/>
         <line num="188" count="0" type="stmt"/>
         <line num="189" count="0" type="stmt"/>
-        <line num="190" count="0" type="stmt"/>
       </file>
     </package>
     <package name="REACT2024.src">
