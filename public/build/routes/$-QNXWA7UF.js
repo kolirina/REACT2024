@@ -1,11 +1,15 @@
 import {
   useTheme
-} from "/build/_shared/chunk-K7PQKRHU.js";
-import "/build/_shared/chunk-JBUPV3AI.js";
+} from "/build/_shared/chunk-QJSBSD7W.js";
+import "/build/_shared/chunk-BFVO6P4Y.js";
+import {
+  Link2 as Link
+} from "/build/_shared/chunk-QLLXX7SC.js";
 import {
   createHotContext
 } from "/build/_shared/chunk-D7BU4XKW.js";
 import "/build/_shared/chunk-UWV35TSL.js";
+import "/build/_shared/chunk-U4FRFQSK.js";
 import {
   require_jsx_dev_runtime
 } from "/build/_shared/chunk-XGOTYLZ5.js";
@@ -14,7 +18,7 @@ import {
   __toESM
 } from "/build/_shared/chunk-PNG5AS42.js";
 
-// src/routes/404.tsx
+// src/routes/$.tsx
 var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
 if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
@@ -22,7 +26,7 @@ if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   prevRefreshReg = window.$RefreshReg$;
   prevRefreshSig = window.$RefreshSig$;
   window.$RefreshReg$ = (type, id) => {
-    window.$RefreshRuntime$.register(type, '"src\\\\routes\\\\404.tsx"' + id);
+    window.$RefreshRuntime$.register(type, '"src\\\\routes\\\\$.tsx"' + id);
   };
   window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
 }
@@ -32,27 +36,32 @@ var _s = $RefreshSig$();
 if (import.meta) {
   import.meta.hot = createHotContext(
     //@ts-expect-error
-    "src\\routes\\404.tsx"
+    "src\\routes\\$.tsx"
   );
-  import.meta.hot.lastModified = "1723388151826.901";
+  import.meta.hot.lastModified = "1723416689150.1487";
 }
 var NotFound = () => {
   _s();
   const darkTheme = useTheme();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: darkTheme ? "dark-NotFound" : "light-NotFound", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { children: "404 Not Found \u{1F63F}" }, void 0, false, {
-      fileName: "src/routes/404.tsx",
-      lineNumber: 28,
+      fileName: "src/routes/$.tsx",
+      lineNumber: 29,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { children: "The page you are looking for does not exist." }, void 0, false, {
-      fileName: "src/routes/404.tsx",
-      lineNumber: 29,
+      fileName: "src/routes/$.tsx",
+      lineNumber: 30,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: "/", children: "Go back to Home" }, void 0, false, {
+      fileName: "src/routes/$.tsx",
+      lineNumber: 31,
       columnNumber: 7
     }, this)
   ] }, void 0, true, {
-    fileName: "src/routes/404.tsx",
-    lineNumber: 27,
+    fileName: "src/routes/$.tsx",
+    lineNumber: 28,
     columnNumber: 10
   }, this);
 };
@@ -68,4 +77,4 @@ window.$RefreshSig$ = prevRefreshSig;
 export {
   __default as default
 };
-//# sourceMappingURL=/build/routes/404-YUH7FAR2.js.map
+//# sourceMappingURL=/build/routes/$-QNXWA7UF.js.map

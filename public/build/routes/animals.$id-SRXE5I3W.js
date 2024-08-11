@@ -3,18 +3,18 @@ import {
 } from "/build/_shared/chunk-G7CHZRZX.js";
 import "/build/_shared/chunk-3EL3KC52.js";
 import {
+  useTheme
+} from "/build/_shared/chunk-QJSBSD7W.js";
+import "/build/_shared/chunk-BFVO6P4Y.js";
+import {
   Link2 as Link,
   useLoaderData
-} from "/build/_shared/chunk-4A4AD2BB.js";
-import "/build/_shared/chunk-U4FRFQSK.js";
-import {
-  useTheme
-} from "/build/_shared/chunk-K7PQKRHU.js";
-import "/build/_shared/chunk-JBUPV3AI.js";
+} from "/build/_shared/chunk-QLLXX7SC.js";
 import {
   createHotContext
 } from "/build/_shared/chunk-D7BU4XKW.js";
 import "/build/_shared/chunk-UWV35TSL.js";
+import "/build/_shared/chunk-U4FRFQSK.js";
 import {
   require_jsx_dev_runtime
 } from "/build/_shared/chunk-XGOTYLZ5.js";
@@ -51,7 +51,7 @@ if (import.meta) {
     //@ts-expect-error
     "src\\routes\\animals.$id.tsx"
   );
-  import.meta.hot.lastModified = "1723404629251.0312";
+  import.meta.hot.lastModified = "1723415839448.5825";
 }
 function AnimalDetails() {
   _s();
@@ -120,4 +120,4 @@ window.$RefreshSig$ = prevRefreshSig;
 export {
   AnimalDetails as default
 };
-//# sourceMappingURL=/build/routes/animals.$id-2XMTPY7E.js.map
+//# sourceMappingURL=/build/routes/animals.$id-SRXE5I3W.js.map

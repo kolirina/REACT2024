@@ -3393,7 +3393,7 @@ if (import.meta) {
     //@ts-expect-error
     "src\\slices\\paginationSlice.ts"
   );
-  import.meta.hot.lastModified = "1723380617179.8145";
+  import.meta.hot.lastModified = "1723415839451.5723";
 }
 var initialState = {
   currentPage: 1,
@@ -3506,4 +3506,4 @@ use-sync-external-store/cjs/use-sync-external-store-with-selector.development.js
    * LICENSE file in the root directory of this source tree.
    *)
 */
-//# sourceMappingURL=/build/_shared/chunk-FBEIXTW6.js.map
+//# sourceMappingURL=/build/_shared/chunk-WZNPQT6M.js.map

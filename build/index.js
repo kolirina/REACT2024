@@ -780,34 +780,40 @@ __export(index_exports, {
 import { redirect } from "@remix-run/node";
 var loader3 = async () => redirect("/animals");
 
-// src/routes/404.tsx
+// src/routes/$.tsx
 var __exports = {};
 __export(__exports, {
   default: () => __default
 });
+import { Link as Link4 } from "@remix-run/react";
 import { jsxDEV as jsxDEV11 } from "react/jsx-dev-runtime";
 var NotFound = () => {
   let darkTheme = useTheme();
   return /* @__PURE__ */ jsxDEV11("div", { className: darkTheme ? "dark-NotFound" : "light-NotFound", children: [
     /* @__PURE__ */ jsxDEV11("h2", { children: "404 Not Found \u{1F63F}" }, void 0, !1, {
-      fileName: "src/routes/404.tsx",
+      fileName: "src/routes/$.tsx",
       lineNumber: 8,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV11("p", { children: "The page you are looking for does not exist." }, void 0, !1, {
-      fileName: "src/routes/404.tsx",
+      fileName: "src/routes/$.tsx",
       lineNumber: 9,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV11(Link4, { to: "/", children: "Go back to Home" }, void 0, !1, {
+      fileName: "src/routes/$.tsx",
+      lineNumber: 10,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
-    fileName: "src/routes/404.tsx",
+    fileName: "src/routes/$.tsx",
     lineNumber: 7,
     columnNumber: 5
   }, this);
 }, __default = NotFound;
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-E3HEGBWX.js", imports: ["/build/_shared/chunk-O4BRYNJ4.js", "/build/_shared/chunk-4A4AD2BB.js", "/build/_shared/chunk-U4FRFQSK.js", "/build/_shared/chunk-D7BU4XKW.js", "/build/_shared/chunk-UWV35TSL.js", "/build/_shared/chunk-XGOTYLZ5.js", "/build/_shared/chunk-7M6SC7J5.js", "/build/_shared/chunk-PNG5AS42.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-TPQH6JTW.js", imports: ["/build/_shared/chunk-FBEIXTW6.js", "/build/_shared/chunk-3EL3KC52.js", "/build/_shared/chunk-JBUPV3AI.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/404": { id: "routes/404", parentId: "root", path: "404", index: void 0, caseSensitive: void 0, module: "/build/routes/404-YUH7FAR2.js", imports: ["/build/_shared/chunk-K7PQKRHU.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-QW5LNJTG.js", imports: void 0, hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/animals": { id: "routes/animals", parentId: "root", path: "animals", index: void 0, caseSensitive: void 0, module: "/build/routes/animals-5UTBZW65.js", imports: ["/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-K7PQKRHU.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/animals.$id": { id: "routes/animals.$id", parentId: "routes/animals", path: ":id", index: void 0, caseSensitive: void 0, module: "/build/routes/animals.$id-2XMTPY7E.js", imports: ["/build/_shared/chunk-3EL3KC52.js", "/build/_shared/chunk-JBUPV3AI.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "2a91d82f", hmr: { runtime: "/build/_shared\\chunk-D7BU4XKW.js", timestamp: 1723412705660 }, url: "/build/manifest-2A91D82F.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-RVNIT2H2.js", imports: ["/build/_shared/chunk-O4BRYNJ4.js", "/build/_shared/chunk-QLLXX7SC.js", "/build/_shared/chunk-D7BU4XKW.js", "/build/_shared/chunk-UWV35TSL.js", "/build/_shared/chunk-U4FRFQSK.js", "/build/_shared/chunk-XGOTYLZ5.js", "/build/_shared/chunk-7M6SC7J5.js", "/build/_shared/chunk-PNG5AS42.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-P3UA7ILI.js", imports: ["/build/_shared/chunk-WZNPQT6M.js", "/build/_shared/chunk-3EL3KC52.js", "/build/_shared/chunk-BFVO6P4Y.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/$": { id: "routes/$", parentId: "root", path: "*", index: void 0, caseSensitive: void 0, module: "/build/routes/$-QNXWA7UF.js", imports: ["/build/_shared/chunk-QJSBSD7W.js"], hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-QW5LNJTG.js", imports: void 0, hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/animals": { id: "routes/animals", parentId: "root", path: "animals", index: void 0, caseSensitive: void 0, module: "/build/routes/animals-NQJIYJQK.js", imports: ["/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-QJSBSD7W.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/animals.$id": { id: "routes/animals.$id", parentId: "routes/animals", path: ":id", index: void 0, caseSensitive: void 0, module: "/build/routes/animals.$id-SRXE5I3W.js", imports: ["/build/_shared/chunk-3EL3KC52.js", "/build/_shared/chunk-BFVO6P4Y.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "e105c99e", hmr: { runtime: "/build/_shared\\chunk-D7BU4XKW.js", timestamp: 1723416689490 }, url: "/build/manifest-E105C99E.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public/build", future = { v3_fetcherPersist: !1, v3_relativeSplatPath: !1, v3_throwAbortReason: !1, unstable_singleFetch: !1, unstable_lazyRouteDiscovery: !1 }, publicPath = "/build/", entry = { module: entry_server_node_exports }, routes = {
@@ -843,10 +849,10 @@ var mode = "development", assetsBuildDirectory = "public/build", future = { v3_f
     caseSensitive: void 0,
     module: index_exports
   },
-  "routes/404": {
-    id: "routes/404",
+  "routes/$": {
+    id: "routes/$",
     parentId: "root",
-    path: "404",
+    path: "*",
     index: void 0,
     caseSensitive: void 0,
     module: __exports
