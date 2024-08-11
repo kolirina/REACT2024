@@ -129,5 +129,4 @@ const Home: NextPage<HomePageProps> = ({
 
 export default Home;
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { getServerSideProps };

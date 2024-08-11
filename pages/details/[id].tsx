@@ -163,7 +163,6 @@ const AnimalDetailsPage: NextPage<AnimalDetailsPageProps> = ({
 
 export default AnimalDetailsPage;
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id, search = '', page = '1' } = context.query;
 
