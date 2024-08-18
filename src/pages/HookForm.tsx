@@ -138,8 +138,8 @@ const HookForm: React.FC = () => {
             <p
               style={{
                 marginTop: 0,
-                marginBottom: 0,
                 fontSize: '12px',
+                marginBottom: '3px',
               }}
             >
               Password Strength: {getPasswordStrengthLabel()}
@@ -285,7 +285,7 @@ const HookForm: React.FC = () => {
 
       <div className="form-field">
         <label>
-          <input type="checkbox" {...register('termsAccepted')} /> I accept the
+          <input type="checkbox" {...register('termsAccepted')} /> Accept the
           Terms and Conditions
         </label>
         <p className="error-message">{errors.termsAccepted?.message}</p>
