@@ -23,10 +23,6 @@ export const formSchema = yup.object().shape({
   picture: yup
     .string()
     .nullable()
-    // Allows null value
-    //   .test('fileFormat', 'Unsupported file format', (value) => {
-    //     return value?.startsWith('data:image/');
-    //   })
     .test('fileSize', 'File too large', (value) => {
       if (!value) return true; // Skip validation if no file
       try {
@@ -39,4 +35,9 @@ export const formSchema = yup.object().shape({
         return false; // Return false if there's an error in decoding
       }
     }),
+  country: yup.string().required('Country is required'),
+  termsAccepted: yup
+    .boolean()
+    .oneOf([true], 'You must accept the terms and conditions')
+    .required(),
 });

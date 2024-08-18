@@ -7,7 +7,7 @@ import HookForm from './pages/HookForm.tsx';
 import UncontrolledForm from './pages/UncontrolledForm.tsx';
 import Home from './pages/Home.tsx';
 import NotFound from './pages/NotFound.tsx';
-import store from './store';
+import store from './redux/store.tsx';
 import { Provider } from 'react-redux';
 
 createRoot(document.getElementById('root')!).render(

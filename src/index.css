@@ -15,12 +15,17 @@ a:hover {
   color: #2e34a8;
 }
 
+ul {
+  list-style-type: none;
+}
+
 body {
   margin: 20px;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
 }
 
 h1 {
@@ -40,20 +45,28 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
+
+input:focus,
+input:hover,
+input:focus-visible {
+  outline: 4px auto rgba(138, 20, 85, 0.404);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+button:disabled {
+  background-color: #1033538f;
+  color: #a0a0a0;
+}
+
+button:hover:not(:disabled) {
+  background-color: #9b167aa9;
 }
 
 form {
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  border: 1px solid #c1c3d8;
-  background-color: #c1c3d8;
+  border: 1px solid transparent;
+  background-color: #c1c3d885;
   padding: 30px;
 }
 
@@ -67,6 +80,14 @@ input {
   letter-spacing: 1px;
 }
 
+input[type='radio'],
+[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
 .fileInput {
   color: rgb(104, 86, 170);
   letter-spacing: normal;
@@ -74,16 +95,47 @@ input {
   font-size: smaller;
 }
 
-/* 
-@media {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.form-group {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  /* margin-bottom: 16px; /* Space between form elements */
+}
+
+/* .radio-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 } */
+
+.gender-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.gender-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.radio-plus-gender {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.error-message {
+  color: rgb(255, 0, 149);
+  font-size: 0.875rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  min-height: 1.25rem;
+}
