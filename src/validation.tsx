@@ -4,7 +4,7 @@ import { MAX_FILE_SIZE } from './Constants';
 export const formSchema = yup.object().shape({
   name: yup
     .string()
-    .matches(/^[A-Z]/, 'First letter must be uppercase')
+    .matches(/^[A-Z]/, 'First letter must be latin uppercase')
     .required('Name is a required field'),
   age: yup
     .number()
@@ -16,8 +16,8 @@ export const formSchema = yup.object().shape({
     .required('Email is a required field'),
   password: yup
     .string()
-    .matches(/[A-Z]/, 'One uppercase required')
-    .matches(/[a-z]/, 'One lowercase required')
+    .matches(/[A-Z]/, 'One latin uppercase letter required')
+    .matches(/[a-z]/, 'One latin lowercase letter required')
     .matches(/\d/, 'One number required')
     .matches(/[@$!%*?&#]/, 'One special character required')
     .required('Password is a required field'),

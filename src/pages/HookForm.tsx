@@ -186,8 +186,8 @@ const HookForm: React.FC = () => {
                 }}
               >
                 {passwordStrength.hasUppercase
-                  ? '✔ 1 uppercase letter'
-                  : 'X 1 uppercase letter'}
+                  ? '✔ 1 uppercase latin letter'
+                  : 'X 1 uppercase latin letter'}
               </li>
               <li
                 style={{
@@ -196,8 +196,8 @@ const HookForm: React.FC = () => {
                 }}
               >
                 {passwordStrength.hasLowercase
-                  ? '✔ 1 lowercase letter'
-                  : 'X 1 lowercase letter'}
+                  ? '✔ 1 lowercase latin letter'
+                  : 'X 1 lowercase latin letter'}
               </li>
               <li
                 style={{
